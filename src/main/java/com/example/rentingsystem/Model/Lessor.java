@@ -32,5 +32,5 @@ public class Lessor {
     private String phoneNumber;
 
     private Double balance = 0.0;
-  //// hihi
+
 }
