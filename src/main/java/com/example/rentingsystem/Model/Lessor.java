@@ -2,7 +2,6 @@ package com.example.rentingsystem.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +20,15 @@ public class Lessor {
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(20) not null")
     private String name;
+
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(40) not null unique")
     private String email;
+
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(20) not null")
     private String status;
+
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(20) not null")
     private String phoneNumber;

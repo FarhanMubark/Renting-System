@@ -1,13 +1,14 @@
 package com.example.rentingsystem.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @Getter
@@ -18,4 +19,22 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Should be not empty")
+    @Column(columnDefinition = "varchar(30) not null")
+    private String productName;
+
+    @NotEmpty(message = "Should be not empty")
+    @Column(columnDefinition = "varchar(30) not null")
+    private String renterName;
+
+    @NotNull(message = "Should be not null")
+    @Column(columnDefinition = "int not null")
+    private Integer productPrice;
+
+    @NotEmpty(message = "Should be not empty")
+    @Column(columnDefinition = "varchar(30) not null")
+    private String leesorName;
+
+    private Date endDate;
 }
