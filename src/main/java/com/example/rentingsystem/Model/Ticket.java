@@ -1,5 +1,6 @@
 package com.example.rentingsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -28,4 +29,15 @@ public class Ticket {
     @Column(columnDefinition = "varchar(50) not null")
     private String ticketStatus;
 
+
+    @ManyToOne
+    @JoinColumn()
+    @JsonIgnore
+    private Lessor lessor;
+
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn()
+    private Support support;
 }
