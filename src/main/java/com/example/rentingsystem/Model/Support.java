@@ -28,4 +28,5 @@ public class Support {
     @NotEmpty(message = "Should be not empty")
     @Column(columnDefinition = "varchar(10) not null")
     private String supportType;
+
 }
