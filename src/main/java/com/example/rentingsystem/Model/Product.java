@@ -1,9 +1,7 @@
 package com.example.rentingsystem.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -38,6 +36,11 @@ public class Product {
     private Date duration;
 
     private Integer review;
+
+    @ManyToOne
+    @JoinColumn()
+    @JsonIgnore
+    private Lessor lessor;
 
 
 }

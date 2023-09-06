@@ -1,5 +1,6 @@
 package com.example.rentingsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -32,4 +33,12 @@ public class Subscription {
     @NotEmpty(message = "should not be empty")
     @Column(columnDefinition = "varchar(30) not null")
     private String sizeOfWharehose;
+
+    @OneToOne
+    private Lessor lessor;
+
+    @OneToOne
+    @JsonIgnore
+    @MapsId
+    private Warehouse warehouse;
 }
