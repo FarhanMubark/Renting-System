@@ -21,20 +21,22 @@ public class Order {
     private Integer id;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(30) not null")
+//    @Column(columnDefinition = "varchar(30) not null")
     private String productName;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(30) not null")
+//    @Column(columnDefinition = "varchar(30) not null")
     private String renterName;
 
     @NotNull(message = "Should be not null")
-    @Column(columnDefinition = "int not null")
+//    @Column(columnDefinition = "int not null")
     private Integer productPrice;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(30) not null")
-    private String leesorName;
+//    @Column(columnDefinition = "varchar(30) not null")
+    private String lessorName;
 
     private Date endDate;
+
+
 }

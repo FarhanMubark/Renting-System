@@ -30,7 +30,7 @@ public class ProductService {
         product1.setProductStatus(product.getProductStatus());
         product1.setProductPrice(product.getProductPrice());
         product1.setProductCategory(product.getProductCategory());
-        product1.setDuration(product.getDuration());
+        product1.setEndDate(product.getEndDate());
         product1.setProductDescription(product.getProductDescription());
         productRepository.save(product1);
     }

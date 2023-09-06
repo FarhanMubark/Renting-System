@@ -33,7 +33,7 @@ public class Product {
 
     private String productStatus;
 
-    private Date duration;
+    private Date endDate;
 
     private Integer review;
 

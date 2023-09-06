@@ -23,6 +23,10 @@ public class Renter {
 
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(20) not null")
+    private String name;
+
+    @NotEmpty(message = "Should not be empty")
+    @Column(columnDefinition = "varchar(20) not null")
     private String status;
 
     @NotEmpty(message = "Should not be empty")
