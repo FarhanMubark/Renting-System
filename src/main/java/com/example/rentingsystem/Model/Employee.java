@@ -34,9 +34,18 @@ public class Employee {
     @Column(columnDefinition = "varchar(10) not null")
     private String phoneNumber;
 
+
     @OneToOne
     @MapsId
     @JsonIgnore
     private User user;
+
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn()
+    private Warehouse warehouse;
+
+
 
 }

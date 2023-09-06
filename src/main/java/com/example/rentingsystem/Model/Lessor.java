@@ -52,4 +52,8 @@ public class Lessor {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
     private Set<Product> products;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
+    private Set<Ticket> tickets;
+
 }

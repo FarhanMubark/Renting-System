@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -27,5 +29,7 @@ public class Warehouse {
     @OneToOne
     private Subscription subscription;
 
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "warehouse")
+    private Set<Employee> employees;
 
 }
