@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -35,6 +37,12 @@ public class Renter {
     private String email;
 
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy ="renter")
+    private Set<Product> products;
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy ="renter")
+    private Set<MyOrder> myOrders;
 
     @OneToOne
     @MapsId
