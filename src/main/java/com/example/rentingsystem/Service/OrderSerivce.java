@@ -4,7 +4,7 @@ import com.example.rentingsystem.Model.Lessor;
 import com.example.rentingsystem.Model.Order;
 import com.example.rentingsystem.Model.Product;
 import com.example.rentingsystem.Model.Renter;
-import com.example.rentingsystem.Repository.LeesorRepository;
+import com.example.rentingsystem.Repository.LessorRepository;
 import com.example.rentingsystem.Repository.OrderRepository;
 import com.example.rentingsystem.Repository.ProductRepository;
 import com.example.rentingsystem.Repository.RenterRepository;
@@ -18,7 +18,7 @@ import java.util.List;
 public class OrderSerivce {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private final LeesorRepository leesorRepository;
+    private final LessorRepository lessorRepository;
     private final RenterRepository renterRepository;
 
 

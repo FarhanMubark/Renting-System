@@ -24,6 +24,16 @@ public class User {
     private String password;
     @NotEmpty(message = "Should be not empty")
     @Column(columnDefinition = "varchar(25) not null")
+
     private String role;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @PrimaryKeyJoinColumn
+    private Renter renter;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private Lessor lessor;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    private Employee employee;
 
 }

@@ -1,6 +1,7 @@
 package com.example.rentingsystem.Controller;
 
 import com.example.rentingsystem.Api.ApiResponse;
+import com.example.rentingsystem.DTOs.EmployeeDTO;
 import com.example.rentingsystem.Model.Employee;
 import com.example.rentingsystem.Service.EmployeeService;
 import jakarta.validation.Valid;
@@ -22,8 +23,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity addEmployee (@RequestBody @Valid Employee employee){
-        employeeService.addEmployee(employee);
+    public ResponseEntity addEmployee (@RequestBody @Valid EmployeeDTO employeeDTO){
+        employeeService.addEmployee(employeeDTO);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("employee added "));
     }
 
