@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
 private final AuthService authService;
-    @GetMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid User user){
-        authService.register(user);
-        return ResponseEntity.status(HttpStatus.OK).body("Register successfully");
-    }
+//    @GetMapping("/register")
+//    public ResponseEntity register(@RequestBody @Valid User user){
+//        authService.register(user);
+//        return ResponseEntity.status(HttpStatus.OK).body("Register successfully");
+//    }
 }

@@ -1,5 +1,6 @@
 package com.example.rentingsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,10 @@ public class Employee {
     private String phoneNumber;
 
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn()
+    private Warehouse warehouse;
 
 
 }
