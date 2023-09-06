@@ -1,11 +1,14 @@
 package com.example.rentingsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -35,4 +38,13 @@ public class Lessor {
 
     private Double balance = 0.0;
 
+
+    @OneToOne
+    @JsonIgnore
+    @MapsId
+    private Subscription subscription;
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
+    private Set<Product> products;
 }

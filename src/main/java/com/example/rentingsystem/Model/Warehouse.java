@@ -23,4 +23,7 @@ public class Warehouse {
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(50) not null")
     private String location;
+
+    @OneToOne
+    private Subscription subscription;
 }
