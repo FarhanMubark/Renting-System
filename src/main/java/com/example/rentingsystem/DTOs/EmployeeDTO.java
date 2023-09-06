@@ -1,22 +1,21 @@
-package com.example.rentingsystem.Model;
+package com.example.rentingsystem.DTOs;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor
-@NoArgsConstructor
-public class Employee {
+public class EmployeeDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer userId;
 
     @NotEmpty(message = "Should be not empty")
     @Column(columnDefinition = "varchar(25) not null")
@@ -33,10 +32,4 @@ public class Employee {
     @NotEmpty(message = "Should be not empty")
     @Column(columnDefinition = "varchar(10) not null")
     private String phoneNumber;
-
-    @OneToOne
-    @MapsId
-    @JsonIgnore
-    private User user;
-
 }

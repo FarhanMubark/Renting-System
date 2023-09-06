@@ -1,5 +1,6 @@
 package com.example.rentingsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -32,5 +33,12 @@ public class Renter {
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(50) not null")
     private String email;
+
+
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private User user;
 
 }

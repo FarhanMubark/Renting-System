@@ -44,6 +44,11 @@ public class Lessor {
     @MapsId
     private Subscription subscription;
 
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+    private User user;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
     private Set<Product> products;
