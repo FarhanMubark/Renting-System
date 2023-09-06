@@ -42,5 +42,16 @@ public class Product {
     @JsonIgnore
     private Lessor lessor;
 
+    @ManyToOne
+    @JoinColumn()
+    @JsonIgnore
+    private Renter renter;
+
+    @ManyToOne
+    @JoinColumn()
+    @JsonIgnore
+    private MyOrder myOrder;
+
+
 
 }
