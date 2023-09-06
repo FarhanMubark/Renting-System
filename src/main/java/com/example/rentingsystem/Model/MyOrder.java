@@ -10,12 +10,12 @@ import lombok.Setter;
 
 import java.util.Date;
 
-@Entity(name = "order")
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+public class MyOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
