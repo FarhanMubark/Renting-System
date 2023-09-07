@@ -1,6 +1,7 @@
 package com.example.rentingsystem.Controller;
 
 import com.example.rentingsystem.Api.ApiResponse;
+import com.example.rentingsystem.DTOs.EmployeeDTO;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
 import com.example.rentingsystem.Service.AuthService;
@@ -30,11 +31,16 @@ private final AuthService authService;
     @PostMapping("/add-renter")
     public ResponseEntity addUser(@RequestBody @Valid RenterDTO renterDTO){
         authService.addUser(renterDTO);
-        return ResponseEntity.status(200).body(new ApiResponse("User Added"));
+        return ResponseEntity.status(200).body(new ApiResponse("Renter Added"));
     }
     @PostMapping("/add-lessors")
     public ResponseEntity addLessors(@RequestBody @Valid LessorDTO lessorDTO){
         authService.addUser2(lessorDTO);
-        return ResponseEntity.status(200).body(new ApiResponse("User Added"));
+        return ResponseEntity.status(200).body(new ApiResponse("Lessor Added"));
+    }
+    @PostMapping("/add-employee")
+    public ResponseEntity addEmployee(@RequestBody @Valid EmployeeDTO employeeDTO){
+        authService.addEmployee(employeeDTO);
+        return ResponseEntity.status(200).body(new ApiResponse("Employee Added"));
     }
 }

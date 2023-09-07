@@ -1,9 +1,11 @@
 package com.example.rentingsystem.Service;
 
+import com.example.rentingsystem.DTOs.EmployeeDTO;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
 import com.example.rentingsystem.Model.*;
 import com.example.rentingsystem.Repository.AuthRepository;
+import com.example.rentingsystem.Repository.EmployeeRepository;
 import com.example.rentingsystem.Repository.LessorRepository;
 import com.example.rentingsystem.Repository.RenterRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +23,7 @@ public class AuthService {
     private final AuthRepository authRepository;
     private final RenterRepository renterRepository;
     private final LessorRepository lessorRepository;
+    private final EmployeeRepository employeeRepository;
 
 
     public List<User> getUsers(){
@@ -46,6 +49,14 @@ public class AuthService {
         Lessor lessor = new Lessor(null,lessorDTO.getName(),lessorDTO.getEmail(),lessorDTO.getStatus(),lessorDTO.getPhoneNumber(),0.0,null,null,null,null,null);
         lessor.setUser(user);
         lessorRepository.save(lessor);
+    }
+
+    public void addEmployee(EmployeeDTO employeeDTO){
+        String hash = new BCryptPasswordEncoder().encode(employeeDTO.getPassword());
+        User user = new User(null,employeeDTO.getUsername(),hash,"Employee",null,null,null,null);
+        authRepository.save(user);
+        Employee employee = new Employee(null, employeeDTO.getEmployeeName(), employeeDTO.getAge(), employeeDTO.getBrithDay(), employeeDTO.getPhoneNumber(), user,null);
+        employeeRepository.save(employee);
     }
 
 
