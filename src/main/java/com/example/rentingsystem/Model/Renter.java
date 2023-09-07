@@ -34,11 +34,15 @@ public class Renter {
     @Column(columnDefinition = "varchar(50) not null")
     private String email;
 
-
-
     @OneToOne
     @MapsId
     @JsonIgnore
     private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "support_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Support support;
 
 }

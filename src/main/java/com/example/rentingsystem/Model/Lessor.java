@@ -40,8 +40,7 @@ public class Lessor {
 
 
     @OneToOne
-    @JsonIgnore
-    @MapsId
+    @PrimaryKeyJoinColumn
     private Subscription subscription;
 
     @OneToOne
@@ -55,5 +54,10 @@ public class Lessor {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
     private Set<Ticket> tickets;
+
+    @ManyToOne
+    @JoinColumn(name = "support_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Support support;
 
 }

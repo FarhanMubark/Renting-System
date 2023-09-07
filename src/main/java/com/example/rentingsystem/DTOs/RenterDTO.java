@@ -12,17 +12,21 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RenterDTO {
 
-    @NotNull
     private Integer user_id;
+
+    private String username;
+
+    private String password;
 
     @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(20) not null")
     private String name;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(columnDefinition = "varchar(10) not null")
     private String phoneNumber;
     @NotEmpty(message = "Should not be empty")
-    @Column(columnDefinition = "varchar(40) not null unique")
     private String email;
+
+    private String status;
+
 }

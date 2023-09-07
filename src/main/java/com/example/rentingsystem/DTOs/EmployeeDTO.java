@@ -13,23 +13,28 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class EmployeeDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Integer user_id;
+
+    private String username;
+
+    private String password;
+
+    @NotEmpty(message = "Should not be empty")
+    private String name;
+
+    @NotEmpty(message = "Should not be empty")
+    private String phoneNumber;
+
+    @NotEmpty(message = "Should not be empty")
+    private String email;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(25) not null")
     private String employeeName;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(25) not null")
     private String age;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(30) not null")
     private String brithDay;
 
-    @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(10) not null")
-    private String phoneNumber;
 }

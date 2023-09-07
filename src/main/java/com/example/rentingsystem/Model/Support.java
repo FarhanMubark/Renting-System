@@ -34,4 +34,11 @@ public class Support {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "support")
     private Set<Ticket> tickets;
+
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "support")
+    private Set<Renter> renters;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "support")
+    private Set<Lessor> lessors;
 }
