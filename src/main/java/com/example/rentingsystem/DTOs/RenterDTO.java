@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RenterDTO {
 
-    private Integer user_id;
+    //private Integer user_id;
 
     private String username;
 

@@ -37,14 +37,14 @@ public class Renter {
     private String email;
 
     @OneToOne
-    @MapsId
     @JsonIgnore
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "renter")
+    private Set<MyOrder> myOrderSet;
 
-    @ManyToOne
-    @JoinColumn(name = "support_id", referencedColumnName = "id")
-    @JsonIgnore
-    private Support support;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "renter")
+    private Set<Ticket> tickets;
 }
+

@@ -44,5 +44,18 @@ public class MyOrder {
 
     private Date endDate;
 
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Product product;
+
+    // problem
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "renter_id",referencedColumnName = "id")
+    private Renter renter;
+
+
+
 
 }

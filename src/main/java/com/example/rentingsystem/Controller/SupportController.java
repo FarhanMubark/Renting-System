@@ -1,7 +1,6 @@
 package com.example.rentingsystem.Controller;
 
 import com.example.rentingsystem.Api.ApiResponse;
-import com.example.rentingsystem.Model.Support;
 import com.example.rentingsystem.Service.SupportSerivce;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +15,7 @@ public class SupportController {
 
     private final SupportSerivce supportSerivce;
 
-    @GetMapping("/")
+/*    @GetMapping("/")
     public ResponseEntity getSupports(){
         return ResponseEntity.status(HttpStatus.OK).body(supportSerivce.getSupports());
     }
@@ -34,6 +33,6 @@ public class SupportController {
     public ResponseEntity updateSupport(@RequestBody @Valid Support support, @PathVariable Integer supportId){
         supportSerivce.updateSupport(support,supportId);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("updated"));
-    }
+    }*/
 }
 

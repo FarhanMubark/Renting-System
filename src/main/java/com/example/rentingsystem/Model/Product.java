@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -42,15 +43,8 @@ public class Product {
     @JsonIgnore
     private Lessor lessor;
 
-    @ManyToOne
-    @JoinColumn()
-    @JsonIgnore
-    private Renter renter;
-
-    @ManyToOne
-    @JoinColumn()
-    @JsonIgnore
-    private MyOrder myOrder;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy ="product")
+    private Set<MyOrder> myOrderSet;
 
 
 

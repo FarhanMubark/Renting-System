@@ -2,15 +2,10 @@ package com.example.rentingsystem.Service;
 
 import com.example.rentingsystem.Api.ApiException;
 import com.example.rentingsystem.DTOs.RenterDTO;
-import com.example.rentingsystem.Model.Lessor;
 import com.example.rentingsystem.Model.Renter;
-import com.example.rentingsystem.Model.Support;
-import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Repository.AuthRepository;
 import com.example.rentingsystem.Repository.RenterRepository;
-import com.example.rentingsystem.Repository.SupportRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RenterService {
     private final RenterRepository renterRepository;
-    private final SupportRepository supportRepository;
+    //private final SupportRepository supportRepository;
     private final AuthRepository authRepository;
     private final AuthService authService;
     public List<Renter> getRenters(){
@@ -30,7 +25,7 @@ public class RenterService {
 
 
     public void updateRenter(RenterDTO renterDTO){
-        Renter renter = renterRepository.findRenterById(renterDTO.getUser_id());
+/*        Renter renter = renterRepository.findRenterById(renterDTO.getUser_id());
 
         if (renter == null){
             throw new ApiException("Id Not found");
@@ -39,7 +34,7 @@ public class RenterService {
         renter.setEmail(renterDTO.getEmail());
         renter.setPhoneNumber(renterDTO.getPhoneNumber());
 
-        renterRepository.save(renter);
+        renterRepository.save(renter);*/
     }
 
 
@@ -58,15 +53,15 @@ public class RenterService {
 
 
 
-    public void assignSupportToRenter(Integer support_id, Integer renter_id){
+/*    public void assignSupportToRenter(Integer support_id, Integer renter_id){
         Support support = supportRepository.findSupportById(support_id);
         Renter renter = renterRepository.findRenterById(renter_id);
 
                 if (support==null || renter == null){
             throw new ApiException("can't assign");
         }
-                renter.setSupport(support);
+                //renter.setSupport(support);
                 renterRepository.save(renter);
-    }
+    }*/
 
 }
