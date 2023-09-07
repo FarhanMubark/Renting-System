@@ -16,7 +16,7 @@ public class LessorDTO {
 
     private String password;
 
-
+////
     private String status;
 
     @NotEmpty(message = "Should not be empty")
