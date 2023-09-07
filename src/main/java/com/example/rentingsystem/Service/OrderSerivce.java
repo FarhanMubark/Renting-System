@@ -32,8 +32,12 @@ public class OrderSerivce {
 
 
     public void addOrder(Product product, Lessor leesor, Renter renter){
+
         MyOrder myOrder = new MyOrder(null,product.getProductName(),renter.getName(),product.getProductPrice(),leesor.getName(),product.getEndDate());
         orderRepository.save(myOrder);
+        MyOrder order = new MyOrder(null,product.getProductName(),renter.getName(),product.getProductPrice(),leesor.getName(),product.getEndDate(),null,null);
+        orderRepository.save(order);
+
     }
 
 }
