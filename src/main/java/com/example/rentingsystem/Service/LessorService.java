@@ -3,9 +3,11 @@ package com.example.rentingsystem.Service;
 import com.example.rentingsystem.Api.ApiException;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.Model.Lessor;
+import com.example.rentingsystem.Model.Support;
 import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Repository.AuthRepository;
 import com.example.rentingsystem.Repository.LessorRepository;
+import com.example.rentingsystem.Repository.SupportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
 public class LessorService {
 
     private final LessorRepository lessorRepository;
+    private final SupportRepository supportRepository;
     private final AuthRepository authRepository;
 
 
@@ -36,18 +39,18 @@ public class LessorService {
         lessorRepository.save(lessor);
     }
 
-    public void updateLessor(Integer id, Lessor lessor){
-        Lessor lessor1 = lessorRepository.findLessorById(id);
+    public void updateLessor(LessorDTO lessorDTO){
+        Lessor lessor1 = lessorRepository.findLessorById(lessorDTO.getUser_id());
 
         if (lessor1 == null){
             throw new ApiException("Id Not found");
         }
 
-        lessor1.setBalance(lessor.getBalance());
-        lessor1.setName(lessor.getName());
-        lessor1.setEmail(lessor.getEmail());
-        lessor1.setPhoneNumber(lessor1.getPhoneNumber());
-        lessor1.setSubscription(lessor.getSubscription());
+
+        lessor1.setName(lessorDTO.getName());
+        lessor1.setEmail(lessorDTO.getEmail());
+        lessor1.setPhoneNumber(lessorDTO.getPhoneNumber());
+
 
         lessorRepository.save(lessor1);
     }
@@ -61,6 +64,20 @@ public class LessorService {
 
         lessorRepository.delete(lessor);
 
+    }
+
+
+
+    public void assignSupportToLessor(Integer support_id, Integer lessor_id){
+        Support support = supportRepository.findSupportById(support_id);
+        Lessor lessor = lessorRepository.findLessorById(lessor_id);
+
+                if (support==null || lessor == null){
+            throw new ApiException("can't assign");
+        }
+
+                lessor.setSupport(support);
+                lessorRepository.save(lessor);
     }
 
 

@@ -35,6 +35,8 @@ public class Subscription {
     private String sizeOfWharehose;
 
     @OneToOne
+    @JsonIgnore
+    @MapsId
     private Lessor lessor;
 
     @OneToOne

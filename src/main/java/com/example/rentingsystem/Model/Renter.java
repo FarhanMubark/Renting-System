@@ -36,17 +36,15 @@ public class Renter {
     @Column(columnDefinition = "varchar(50) not null")
     private String email;
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy ="renter")
-    private Set<Product> products;
-
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy ="renter")
-    private Set<MyOrder> myOrders;
-
     @OneToOne
     @MapsId
     @JsonIgnore
     private User user;
+
+
+    @ManyToOne
+    @JoinColumn(name = "support_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Support support;
 
 }

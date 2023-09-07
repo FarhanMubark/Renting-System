@@ -25,11 +25,12 @@ public class EmployeeService {
 
 
     public void addEmployee(EmployeeDTO employeeDTO){
-        User user = authRepository.findUserById(employeeDTO.getUserId());
+        User user = authRepository.findUserById(employeeDTO.getUser_id());
 
-                if (user == null){
-            throw new ApiException("Id Not found");
+        if(employeeDTO.getUsername() == null || employeeDTO.getPassword() == null){
+            throw new ApiException("username or password cannot be null");
         }
+
 
                 Employee employee = new Employee();
                 employee.setEmployeeName(employeeDTO.getEmployeeName());
