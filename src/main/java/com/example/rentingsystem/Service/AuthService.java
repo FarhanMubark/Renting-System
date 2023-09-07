@@ -33,6 +33,7 @@ public class AuthService {
         Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getStatus(),renterDTO.getEmail(),user,null);
         renterRepository.save(renter);
     }
+    //
     public void addUser2(LessorDTO lessorDTO){
         Date date= new Date();
         Date date2= new Date();
