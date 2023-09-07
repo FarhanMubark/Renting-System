@@ -26,8 +26,8 @@ public class Warehouse {
     @Column(columnDefinition = "varchar(50) not null")
     private String location;
 
-    @OneToOne
-    private Subscription subscription;
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "warehouse")
+    private Set<Lessor> lessors;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "warehouse")
     private Set<Employee> employees;

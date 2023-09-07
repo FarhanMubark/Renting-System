@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -31,13 +33,18 @@ public class Ticket {
 
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "lessor_id", referencedColumnName = "id")
     @JsonIgnore
     private Lessor lessor;
+
+    @ManyToOne
+    @JoinColumn(name = "renter_id", referencedColumnName = "id")
+    @JsonIgnore
+    private Renter renter;
 
 
     @ManyToOne
     @JsonIgnore
-    @JoinColumn()
-    private Support support;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 }

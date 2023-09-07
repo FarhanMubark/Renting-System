@@ -29,8 +29,10 @@ public class AuthService {
 
     public void addUser(RenterDTO renterDTO){
         String hash = new BCryptPasswordEncoder().encode(renterDTO.getPassword());
-        User user = new User(null,renterDTO.getUsername(),hash,"RENTER",null,null,null);
-        Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getStatus(),renterDTO.getEmail(),user,null);
+        User user = new User(null,renterDTO.getUsername(),hash,"RENTER",null,null,null,null);
+        authRepository.save(user);
+        Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getStatus(),renterDTO.getEmail(),null,null,null);
+        renter.setUser(user);
         renterRepository.save(renter);
     }
     //
@@ -38,13 +40,11 @@ public class AuthService {
         Date date= new Date();
         Date date2= new Date();
         String hash = new BCryptPasswordEncoder().encode(lessorDTO.getPassword());
-        User user = new User(null,lessorDTO.getUsername(),hash,"LESSOR",null,null,null);
+        User user = new User(null,lessorDTO.getUsername(),hash,"LESSOR",null,null,null,null);
+        authRepository.save(user);
 
-
-
-        Warehouse warehouse = new Warehouse(null,"0","null",null,null);
-        Subscription subscription = new Subscription(1,500,date,date2,"0",null,warehouse);
-        Lessor lessor = new Lessor(null,lessorDTO.getName(),lessorDTO.getEmail(),lessorDTO.getStatus(),lessorDTO.getPhoneNumber(),0.0,subscription,user,null,null,null);
+        Lessor lessor = new Lessor(null,lessorDTO.getName(),lessorDTO.getEmail(),lessorDTO.getStatus(),lessorDTO.getPhoneNumber(),0.0,null,null,null,null,null);
+        lessor.setUser(user);
         lessorRepository.save(lessor);
     }
 

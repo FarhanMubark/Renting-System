@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -29,15 +30,21 @@ public class User implements UserDetails {
     @Column(columnDefinition = "varchar(25) not null")
 
     private String role;
+
+
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @PrimaryKeyJoinColumn
     private Renter renter;
+
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Lessor lessor;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private Employee employee;
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "user")
+    private Set<Ticket> ticketSet;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

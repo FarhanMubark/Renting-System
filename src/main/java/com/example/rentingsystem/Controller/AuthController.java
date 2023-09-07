@@ -3,11 +3,9 @@ package com.example.rentingsystem.Controller;
 import com.example.rentingsystem.Api.ApiResponse;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
-import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

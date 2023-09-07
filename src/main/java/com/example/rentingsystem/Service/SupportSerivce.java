@@ -1,19 +1,14 @@
 package com.example.rentingsystem.Service;
 
-import com.example.rentingsystem.Api.ApiException;
-import com.example.rentingsystem.Model.Support;
-import com.example.rentingsystem.Repository.SupportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class SupportSerivce {
-    private final SupportRepository supportRepository;
+    //private final SupportRepository supportRepository;
 
-    public List<Support> getSupports(){
+/*    public List<Support> getSupports(){
         return supportRepository.findAll();
     }
     public void addSupports(Support support){
@@ -36,6 +31,6 @@ public class SupportSerivce {
             throw new ApiException("Could not find support");
         }
         supportRepository.delete(support1);
-    }
+    }*/
 
 }

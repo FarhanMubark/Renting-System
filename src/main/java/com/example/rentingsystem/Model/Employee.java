@@ -35,15 +35,16 @@ public class Employee {
     private String phoneNumber;
 
 
+
     @OneToOne
-    @MapsId
     @JsonIgnore
     private User user;
 
 
+
     @ManyToOne
     @JsonIgnore
-    @JoinColumn()
+    @JoinColumn(name = "warehouse_id", referencedColumnName = "id")
     private Warehouse warehouse;
 
 

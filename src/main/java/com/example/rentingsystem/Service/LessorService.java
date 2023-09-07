@@ -3,11 +3,9 @@ package com.example.rentingsystem.Service;
 import com.example.rentingsystem.Api.ApiException;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.Model.Lessor;
-import com.example.rentingsystem.Model.Support;
 import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Repository.AuthRepository;
 import com.example.rentingsystem.Repository.LessorRepository;
-import com.example.rentingsystem.Repository.SupportRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +16,7 @@ import java.util.List;
 public class LessorService {
 
     private final LessorRepository lessorRepository;
-    private final SupportRepository supportRepository;
+    //private final SupportRepository supportRepository;
     private final AuthRepository authRepository;
 
 
@@ -68,6 +66,7 @@ public class LessorService {
 
 
 
+/*
     public void assignSupportToLessor(Integer support_id, Integer lessor_id){
         Support support = supportRepository.findSupportById(support_id);
         Lessor lessor = lessorRepository.findLessorById(lessor_id);
@@ -75,10 +74,9 @@ public class LessorService {
                 if (support==null || lessor == null){
             throw new ApiException("can't assign");
         }
-
-                lessor.setSupport(support);
                 lessorRepository.save(lessor);
     }
+*/
 
 
 }

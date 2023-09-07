@@ -35,12 +35,8 @@ public class Subscription {
     private String sizeOfWharehose;
 
     @OneToOne
-    @JsonIgnore
     @MapsId
+    @JsonIgnore
     private Lessor lessor;
 
-    @OneToOne
-    @JsonIgnore
-    @MapsId
-    private Warehouse warehouse;
 }

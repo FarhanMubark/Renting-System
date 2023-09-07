@@ -37,9 +37,9 @@ public class LessorController {
         return ResponseEntity.status(200).body(new ApiResponse("Lessor Deleted"));
     }
 
-    @PutMapping("{support_id}/assign/{lessor_id}")
+/*    @PutMapping("{support_id}/assign/{lessor_id}")
     public ResponseEntity assignSupportToLessor(@PathVariable Integer support_id, @PathVariable Integer lessor_id){
         lessorService.assignSupportToLessor(support_id, lessor_id);
         return ResponseEntity.status(200).body(new ApiResponse("Assign Done"));
-    }
+    }*/
 }
