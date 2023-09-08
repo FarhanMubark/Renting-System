@@ -2,10 +2,15 @@ package com.example.rentingsystem.Service;
 
 import com.example.rentingsystem.Api.ApiException;
 import com.example.rentingsystem.Model.Product;
+import com.example.rentingsystem.Model.User;
+import com.example.rentingsystem.Repository.LessorRepository;
 import com.example.rentingsystem.Repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -42,6 +47,20 @@ public class ProductService {
         }
         productRepository.delete(product1);
     }
+    //increase the number of end Date duration for the LESSOR
+    public void expandDurationForProduct(User user, Integer product_id,Integer numberOfDays,Integer numberOfHours){
+        Product product = productRepository.findProductById(product_id);
+
+        if(product == null){
+            throw new ApiException("Product not found");
+        }
+        if(product.getLessor().getUser() != user){
+            throw new ApiException("Wrong product id");
+        }
+        product.setEndDate(product.getEndDate().plusDays(numberOfDays).plusHours(numberOfHours));
+        productRepository.save(product);
+    }
+
 
 
 }

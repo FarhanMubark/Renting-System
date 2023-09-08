@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 import java.util.Set;
@@ -26,23 +27,38 @@ public class MyOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty(message = "Should be not empty")
-//    @Column(columnDefinition = "varchar(30) not null")
+    private String LessorUsername;
+
     private String productName;
 
-    @NotEmpty(message = "Should be not empty")
-//    @Column(columnDefinition = "varchar(30) not null")
-    private String renterName;
+    private Integer quantity;
 
-    @NotNull(message = "Should be not null")
-//    @Column(columnDefinition = "int not null")
+    private Integer pricePerHour;
+
     private Integer productPrice;
 
-    @NotEmpty(message = "Should be not empty")
-//    @Column(columnDefinition = "varchar(30) not null")
-    private String lessorName;
+    private Integer totalHours;
 
-    private Date endDate;
+    private Double finalPrice;
+
+    private LocalDateTime endDate;
+
+    private String renterName;
+    private String phoneNumber;
+    private Boolean isreturned = false;
+    private Boolean orderIsActive;
+    // if user is still didn't give us the lessor product
+    private Boolean orderBlockState;
+    private LocalDateTime finalWarningDate;
+
+//    @NotNull(message = "Should be not null")
+//    @Column(columnDefinition = "int not null")
+//    private Integer productPrice;
+
+//    @NotEmpty(message = "Should be not empty")
+//    @Column(columnDefinition = "varchar(30) not null")
+//    private String lessorName;
+
 
     @ManyToOne
     @JsonIgnore

@@ -11,6 +11,7 @@ import com.example.rentingsystem.Repository.RenterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,12 +32,23 @@ public class OrderSerivce {
     }
 
 
-    public void addOrder(Product product, Lessor leesor, Renter renter){
+    public void addOrder(Product product, Renter renter,Integer quantity ,LocalDateTime orderDate,Integer totalHours ){
 
-        MyOrder myOrder = new MyOrder(null,product.getProductName(),renter.getName(),product.getProductPrice(),leesor.getName(),product.getEndDate(),null,null);
-        orderRepository.save(myOrder);
-        MyOrder order = new MyOrder(null,product.getProductName(),renter.getName(),product.getProductPrice(),leesor.getName(),product.getEndDate(),null,null);
+        Integer pricePerHour = quantity * product.getProductPrice();
+        double finalPrice = quantity * product.getProductPrice() * totalHours;
+
+        // isreturend if he still didn't return the products, so he will get warning
+        boolean isreturned = false;
+        MyOrder order = new MyOrder(null,product.getLessor().getUser().getUsername(),product.getProductName(),product.getQuantity()
+                ,pricePerHour,product.getProductPrice(),totalHours,finalPrice,orderDate,renter.getUser().getUsername(),renter.getPhoneNumber(),isreturned,true,false,null,product,renter);
+
+        product.setQuantity(product.getQuantity()-quantity);
+        Lessor lessor = product.getLessor();
+        lessor.setBalance(finalPrice);
+        productRepository.save(product);
         orderRepository.save(order);
+
+
 
     }
 
