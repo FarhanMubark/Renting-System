@@ -35,7 +35,9 @@ public class ConfigSecurity {
                 .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/**").permitAll() // allow any one to reach this endpoint
+                .requestMatchers("/api/v1/**").permitAll()
+                // allow any one to reach this endpoint
+                .requestMatchers("/api/v1/employees/**").hasAuthority("ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .logout()

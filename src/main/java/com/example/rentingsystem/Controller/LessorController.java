@@ -2,10 +2,13 @@ package com.example.rentingsystem.Controller;
 
 import com.example.rentingsystem.Api.ApiResponse;
 import com.example.rentingsystem.DTOs.LessorDTO;
+import com.example.rentingsystem.Model.Lessor;
+import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Service.LessorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,27 +22,29 @@ public class LessorController {
         return ResponseEntity.status(200).body(lessorService.getLessors());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity addLessors(@RequestBody @Valid LessorDTO lessorDTO){
-        lessorService.addLessor(lessorDTO);
-        return ResponseEntity.status(200).body(new ApiResponse("Lessor Added"));
+    @PostMapping("/assing-{warehouseId}")
+    public ResponseEntity assign(@AuthenticationPrincipal User user, @PathVariable Integer warehouseId){
+        lessorService.assignLessorToWarehouse(user.getLessor().getId(),warehouseId);
+        return ResponseEntity.status(200).body(new ApiResponse("Lessor assigned"));
     }
 
-    @PutMapping("/put/{id}")
-    public ResponseEntity updateLessors(@RequestBody LessorDTO lessorDTO){
-        lessorService.updateLessor(lessorDTO);
-        return ResponseEntity.status(200).body(new ApiResponse("Lessor Updated"));
+    @PutMapping("/update")
+    public ResponseEntity update(@AuthenticationPrincipal User user, @RequestBody Lessor lessor){
+        lessorService.update(user.getLessor().getId(),lessor);
+        return ResponseEntity.status(200).body(new ApiResponse("Lessor updated"));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteLessors(@PathVariable Integer id){
-        lessorService.deleteLessor(id);
-        return ResponseEntity.status(200).body(new ApiResponse("Lessor Deleted"));
+
+    @PutMapping("/assing-{subscriberId}")
+    public ResponseEntity assignLessorToSubscribtion(@AuthenticationPrincipal User user , @PathVariable Integer subscriberId){
+        lessorService.assignLessorToSubscribe(user.getLessor().getId(), subscriberId);
+        return ResponseEntity.status(200).body(new ApiResponse("Lessor updated"));
     }
 
-/*    @PutMapping("{support_id}/assign/{lessor_id}")
-    public ResponseEntity assignSupportToLessor(@PathVariable Integer support_id, @PathVariable Integer lessor_id){
-        lessorService.assignSupportToLessor(support_id, lessor_id);
-        return ResponseEntity.status(200).body(new ApiResponse("Assign Done"));
-    }*/
+    @PutMapping("/subscriber-{subscriberNumber}")
+    public ResponseEntity lessorSubscribe(@AuthenticationPrincipal User user , @PathVariable Integer subscriberNumber){
+        lessorService.lessorToSubscrive(user.getLessor().getId(), subscriberNumber);
+        return ResponseEntity.status(200).body(new ApiResponse("Lessor subscribed"));
+    }
+
 }
