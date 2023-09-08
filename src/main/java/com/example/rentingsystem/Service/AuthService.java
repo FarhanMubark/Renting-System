@@ -1,5 +1,6 @@
 package com.example.rentingsystem.Service;
 
+import com.example.rentingsystem.Api.ApiException;
 import com.example.rentingsystem.DTOs.EmployeeDTO;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
@@ -56,8 +57,34 @@ public class AuthService {
         User user = new User(null,employeeDTO.getUsername(),hash,"Employee",null,null,null,null);
         authRepository.save(user);
         Employee employee = new Employee(null, employeeDTO.getEmployeeName(), employeeDTO.getAge(), employeeDTO.getBrithDay(), employeeDTO.getPhoneNumber(), user,null);
+        employee.setUser(user);
         employeeRepository.save(employee);
     }
 
 
-}
+    public void deleted(String userName) {
+        User user1 = authRepository.findUserByUsername(userName);
+        if (user1 == null){
+            throw new ApiException("User not found");
+        }
+        authRepository.delete(user1);
+    }
+
+    public User getInfo(String userName){
+        User user = authRepository.findUserByUsername(userName);
+        if (user == null){
+            throw new ApiException("User not found");
+        }
+        return user;
+    }
+
+    public void update(String userName,User user){
+        User user1 = authRepository.findUserByUsername(userName);
+        String hash = new BCryptPasswordEncoder().encode(user1.getPassword());
+        user1.setUsername(user.getUsername());
+        user1.setPassword(hash);
+        authRepository.save(user1);
+    }
+
+  }
+

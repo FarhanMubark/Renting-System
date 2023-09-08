@@ -1,5 +1,6 @@
 package com.example.rentingsystem.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
@@ -9,14 +10,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.text.DateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +27,11 @@ public class Subscription {
     @Column(columnDefinition = " int not null")
     private Integer price;
 
-    private Date startDate;
+    @Column(nullable = false,updatable = false)
+    @Temporal(TemporalType.DATE)
+    LocalDate startDate = LocalDate.now();
 
-    private Date endDate;
+    LocalDate endDate ;
 
     @NotEmpty(message = "should not be empty")
     @Column(columnDefinition = "varchar(30) not null")
@@ -39,4 +42,14 @@ public class Subscription {
     @JsonIgnore
     private Lessor lessor;
 
+
+    public Subscription(){
+
+    }
+    public Subscription(Integer id,Integer price,String sizeOfWharehose,Lessor lessor){
+        this.id =id;
+        this.price =price;
+        this.sizeOfWharehose = sizeOfWharehose;
+        this.lessor = lessor;
+    }
 }
