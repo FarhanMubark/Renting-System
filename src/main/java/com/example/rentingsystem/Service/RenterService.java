@@ -39,6 +39,7 @@ public class RenterService {
         renterRepository.save(renter1);
     }
 
+
 public void buyProduct( Integer renter_id , Integer productId, String typrOfDate,Integer quantity,Integer duration){
     Product product = productRepository.findProductById(productId);
     Renter renter = renterRepository.findRenterById(renter_id);
@@ -76,5 +77,14 @@ public void buyProduct( Integer renter_id , Integer productId, String typrOfDate
     }
 
 
+
+    public Renter getRenterByName(String name){
+        Renter renter = renterRepository.findRenterByName(name);
+
+        if(renter == null){
+            throw new ApiException("Could not find");
+        }
+        return renter;
+    }
 
 }

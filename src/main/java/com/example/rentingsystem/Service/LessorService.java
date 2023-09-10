@@ -1,9 +1,7 @@
 package com.example.rentingsystem.Service;
 
 import com.example.rentingsystem.Api.ApiException;
-import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.Model.*;
-import com.example.rentingsystem.Repository.AuthRepository;
 import com.example.rentingsystem.Repository.LessorRepository;
 import com.example.rentingsystem.Repository.SubscriptionRepository;
 import com.example.rentingsystem.Repository.WarehouseRepository;
@@ -11,16 +9,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Year;
+
 import java.util.List;
-import java.util.zip.DataFormatException;
+
 
 @Service
 @RequiredArgsConstructor
 public class LessorService {
 
     private final LessorRepository lessorRepository;
-    private final AuthRepository authRepository;
     private final WarehouseRepository warehouseRepository;
     private final SubscriptionRepository subscriptionRepository;
 
@@ -96,4 +93,23 @@ public class LessorService {
 
     }
 
+    public Lessor getLessorByName(String name){
+        Lessor lessor = lessorRepository.findLessorByName(name);
+        if(lessor == null){
+            throw new ApiException("Not found");
+        }
+        return lessor;
+    }
+
+    public Subscription getMySubscriptions(Integer lessorId){
+        Lessor lessor = lessorRepository.findLessorById(lessorId);
+        if(lessor == null){
+            throw new ApiException("Not found");
+        }
+        Subscription subscription = subscriptionRepository.findSubscriptionById(lessor.getSubscription().getId());
+        if(lessor == null){
+            throw new ApiException("You dont have a subscription");
+        }
+        return subscription;
+    }
 }

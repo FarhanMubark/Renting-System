@@ -15,4 +15,5 @@ public interface LessorRepository extends JpaRepository<Lessor,Integer> {
 
     Lessor findLessorByUser(User user);
 
+
 }

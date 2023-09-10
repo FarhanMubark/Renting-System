@@ -30,6 +30,11 @@ public class RenterController {
         return ResponseEntity.status(200).body(new ApiResponse("Renter updated"));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity findRenterByName(@AuthenticationPrincipal User user){
+        return ResponseEntity.status(200).body(renterService.getRenterByName(user.getRenter().getName()));
+    }
+
 
     @PostMapping("/buy-product/{product_id}/{typeOfDay}/{quantity}/{duration}")
     public ResponseEntity updateProduct(@AuthenticationPrincipal User user,@PathVariable Integer product_id,@PathVariable String typeOfDay,@PathVariable Integer quantity,@PathVariable Integer duration){
