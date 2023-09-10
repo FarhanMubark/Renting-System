@@ -58,7 +58,7 @@ public class OrderSerivce {
     // Employee
     public String isReturnedProduct(Integer renter_id,Integer order_id){
         Renter renter = renterRepository.findRenterById(renter_id);
-        Integer totalHoursDelayed = 0;
+        Integer totalHoursDelayed = 1;
         if(renter == null){
             throw new ApiException("renter not found");
         }
