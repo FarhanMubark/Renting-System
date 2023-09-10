@@ -70,9 +70,9 @@ private final AuthService authService;
         return ResponseEntity.status(200).body(new ApiResponse("User deleted"));
     }
 
-    @GetMapping("/getinfo/{userName}")
-    public ResponseEntity getInfo(@PathVariable String userName){
-        return ResponseEntity.status(200).body(authService.getInfo(userName));
+    @GetMapping("/getinfo")
+    public ResponseEntity getInfo(@AuthenticationPrincipal User user){
+        return ResponseEntity.status(200).body(authService.getInfo(user.getUsername()));
     }
 
     @PutMapping("/update")

@@ -35,16 +35,46 @@ public class ConfigSecurity {
                 .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
+                .requestMatchers("/api/v1/registers/add-renter").permitAll()
+                .requestMatchers("/api/v1/registers/add-lessors").permitAll()
+                .requestMatchers("/api/v1/registers/add-employee").hasAuthority("ADMIN")
+
                 .requestMatchers("/api/v1/**").permitAll()
+
                 .requestMatchers("/api/v1/tickets/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/tickets/get-by-id/{ticket_id}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/tickets/resolve-ticket/{ticket_id}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/registers/get").hasAnyAuthority("ADMIN","EMPLOYEE")
-                // allow any one to reach this endpoint
-                .requestMatchers("/api/v1/employees/**").hasAuthority("ADMIN")
+
+
+                .requestMatchers("/api/v1/warehouses/**").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/employees/").hasAuthority("ADMIN")
+
+                .requestMatchers("/api/v1/lessors/update").hasAnyAuthority("ADMIN","LESSOR")
+                .requestMatchers("/api/v1/employees/update").hasAnyAuthority("ADMIN","EMPLOYEE")
+                .requestMatchers("/api/v1/renters/update").hasAnyAuthority("ADMIN","RENTER")
+
+                .requestMatchers("/api/v1/subscriptions/").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/subscriptions/update/{subscriptionId}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/subscriptions/{subscriptionId}").hasAuthority("ADMIN")
+
+                .requestMatchers("/api/v1/lessors/subscriber-{subscriberNumber}").hasAuthority("LESSER")
+                .requestMatchers("/api/v1/lessors/assing-{warehouseId}").hasAuthority("ADMIN")
+
+                .requestMatchers("/api/v1/renters/buy-product/{product_id}/{typeOfDay}/{quantity}/{duration}").hasAuthority("RENTER")
+
+                .requestMatchers("/api/v1/lessors/search").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/renters/search").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/employees/search").hasAuthority("ADMIN")
+
+                .requestMatchers("/api/v1/registers/getinfo").hasAnyAuthority("ADMIN","RENTER","LESSOR")
+                .requestMatchers("/api/v1/registers/delete/{userName}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/registers/block-renter/{renter_id}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/registers/block-lessor/{lessor_id}").hasAuthority("ADMIN")
 
                 .requestMatchers("/api/v1/products/add/**").hasAuthority("LESSOR")
 
+                .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("AMDIN")
 
 
                 .anyRequest().permitAll()
