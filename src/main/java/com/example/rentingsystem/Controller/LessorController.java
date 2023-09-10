@@ -34,13 +34,6 @@ public class LessorController {
         return ResponseEntity.status(200).body(new ApiResponse("Lessor updated"));
     }
 
-
-    @PutMapping("/assing-{subscriberId}")
-    public ResponseEntity assignLessorToSubscribtion(@AuthenticationPrincipal User user , @PathVariable Integer subscriberId){
-        lessorService.assignLessorToSubscribe(user.getLessor().getId(), subscriberId);
-        return ResponseEntity.status(200).body(new ApiResponse("Lessor updated"));
-    }
-
     @PutMapping("/subscriber-{subscriberNumber}")
     public ResponseEntity lessorSubscribe(@AuthenticationPrincipal User user , @PathVariable Integer subscriberNumber){
         lessorService.lessorToSubscrive(user.getLessor().getId(), subscriberNumber);
