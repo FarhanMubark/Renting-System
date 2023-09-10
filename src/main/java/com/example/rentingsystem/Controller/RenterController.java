@@ -24,7 +24,7 @@ public class RenterController {
         return ResponseEntity.status(200).body(renterService.getRenters());
     }
 
-    @PutMapping("/")
+    @PutMapping("/update")
     public ResponseEntity update(@AuthenticationPrincipal User user , @RequestBody Renter renter){
         renterService.update(user.getRenter().getId(),renter);
         return ResponseEntity.status(200).body(new ApiResponse("Renter updated"));

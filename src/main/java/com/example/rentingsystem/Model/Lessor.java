@@ -33,7 +33,7 @@ public class Lessor {
     private String status;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(columnDefinition = "varchar(20) not null")
+    @Column(columnDefinition = "varchar(20) not null unique")
     private String phoneNumber;
 
     private Double balance = 0.0;

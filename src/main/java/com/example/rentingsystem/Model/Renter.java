@@ -21,7 +21,7 @@ public class Renter {
     private Integer id;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(columnDefinition = "varchar(10) not null")
+    @Column(columnDefinition = "varchar(10) not null unique")
     private String phoneNumber;
 
     @NotEmpty(message = "Should not be empty")
@@ -33,7 +33,7 @@ public class Renter {
     private String status;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(columnDefinition = "varchar(50) not null")
+    @Column(columnDefinition = "varchar(50) not null unique")
     private String email;
 
     private Integer numberOfWarning = 0 ;
