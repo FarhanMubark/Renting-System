@@ -3,6 +3,7 @@ package com.example.rentingsystem.Controller;
 import com.example.rentingsystem.Api.ApiResponse;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
+import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
 private final AuthService authService;
-//    @GetMapping("/register")
-//    public ResponseEntity register(@RequestBody @Valid User user){
-//        authService.register(user);
-//        return ResponseEntity.status(HttpStatus.OK).body("Register successfully");
-//    }
+
 
 
     @GetMapping("/get")
@@ -27,14 +24,36 @@ private final AuthService authService;
         return ResponseEntity.status(200).body(authService.getUsers());
     }
 
-    @PostMapping("/add-renter")
-    public ResponseEntity addUser(@RequestBody @Valid RenterDTO renterDTO){
-        authService.addUser(renterDTO);
+
+    // Admin or Employee
+    @PostMapping("/add-user")
+    public ResponseEntity AddUser(@RequestBody @Valid User user){
+        authService.addUser(user);
         return ResponseEntity.status(200).body(new ApiResponse("User Added"));
+    }
+
+    @PutMapping("/block-renter/{renter_id}")
+    public ResponseEntity blockRenter(@PathVariable Integer renter_id){
+        authService.setBlockToRenter(renter_id);
+        return ResponseEntity.status(200).body("Renter Blocked");
+    }
+
+    @PutMapping("/block-lessor/{lessor_id}")
+    public ResponseEntity blockLessor(@PathVariable Integer lessor_id){
+        authService.setBlockToLesssor(lessor_id);
+        return ResponseEntity.status(200).body("Lessor Blocked");
+    }
+
+    @PostMapping("/add-renter")
+    public ResponseEntity addRenter(@RequestBody @Valid RenterDTO renterDTO){
+        authService.addRenter(renterDTO);
+        return ResponseEntity.status(200).body(new ApiResponse("Renter Added"));
     }
     @PostMapping("/add-lessors")
     public ResponseEntity addLessors(@RequestBody @Valid LessorDTO lessorDTO){
-        authService.addUser2(lessorDTO);
-        return ResponseEntity.status(200).body(new ApiResponse("User Added"));
+        authService.addLessor(lessorDTO);
+        return ResponseEntity.status(200).body(new ApiResponse("Lessor Added"));
     }
+
+
 }

@@ -24,7 +24,6 @@ public class Product {
 
     private String productNumber;
 
-    // this for productPhoto;
 
     private Integer productPrice;
 

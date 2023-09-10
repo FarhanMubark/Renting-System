@@ -22,7 +22,7 @@ public class ConfigSecurity {
     public DaoAuthenticationProvider daoAuthenticationProvider(){
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder()); // encripring password
+        daoAuthenticationProvider.setPasswordEncoder(new BCryptPasswordEncoder());
 
         return daoAuthenticationProvider;
     }
@@ -35,7 +35,11 @@ public class ConfigSecurity {
                 .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/**").permitAll() // allow any one to reach this endpoint
+                .requestMatchers("/api/v1/**").permitAll()
+                .requestMatchers("/api/v1/tickets/get").hasAnyAuthority("ADMIN","EMPLOYEE")
+                .requestMatchers("/api/v1/tickets/get-by-id/{ticket_id}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/tickets/resolve-ticket/{ticket_id}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/registers/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .anyRequest().permitAll()
                 .and()
                 .logout()
