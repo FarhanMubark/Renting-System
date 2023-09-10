@@ -28,6 +28,12 @@ public class ControllerAdvice {
         return ResponseEntity.status(400).body(new ApiResponse(msg));
     }
 
+    @ExceptionHandler(value = NullPointerException.class)
+    public ResponseEntity<ApiResponse> javaNullExc(NullPointerException e){
+        String msg = e.getMessage();
+        return ResponseEntity.status(400).body(new ApiResponse(msg));
+    }
+
 
     @ExceptionHandler(value = InvalidDataAccessResourceUsageException.class )
     public ResponseEntity<ApiResponse> InvalidDataAccessResourceUsageException(InvalidDataAccessResourceUsageException e){

@@ -1,7 +1,9 @@
 package com.example.rentingsystem.Service;
 
 import com.example.rentingsystem.Api.ApiException;
+
 import com.example.rentingsystem.DTOs.EmployeeDTO;
+
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
 import com.example.rentingsystem.Model.*;
@@ -31,7 +33,34 @@ public class AuthService {
         return authRepository.findAll();
     }
 
-    public void addUser(RenterDTO renterDTO){
+
+    public void addUser(User user){
+        String hash = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(hash);
+        authRepository.save(user);
+    }
+
+    public void setBlockToRenter(Integer renter_id){
+        Renter renter = renterRepository.findRenterById(renter_id);
+
+        if (renter == null){
+            throw new ApiException("Renter Not Found");
+        }
+        renter.getUser().setRole("BLOCKED");
+        renterRepository.save(renter);
+    }
+    public void setBlockToLesssor(Integer lessor_id){
+        Lessor lessor = lessorRepository.findLessorById(lessor_id);
+
+        if (lessor == null){
+            throw new ApiException("Lessor Not Found");
+        }
+
+        lessor.getUser().setRole("BLOCKED");
+        lessorRepository.save(lessor);
+    }
+
+    public void addRenter(RenterDTO renterDTO){
         String hash = new BCryptPasswordEncoder().encode(renterDTO.getPassword());
         User user = new User(null,renterDTO.getUsername(),hash,"RENTER",null,null,null,null);
         authRepository.save(user);
@@ -40,7 +69,7 @@ public class AuthService {
         renterRepository.save(renter);
     }
     //
-    public void addUser2(LessorDTO lessorDTO){
+    public void addLessor(LessorDTO lessorDTO){
         Date date= new Date();
         Date date2= new Date();
         String hash = new BCryptPasswordEncoder().encode(lessorDTO.getPassword());
@@ -87,4 +116,7 @@ public class AuthService {
     }
 
   }
+
+
+}
 

@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.Set;
 
@@ -27,9 +28,10 @@ public class Ticket {
     @Column(columnDefinition = "varchar(50) not null")
     private String ticketType;
 
+
     @NotEmpty(message = "Should be not empty")
     @Column(columnDefinition = "varchar(50) not null")
-    private String ticketStatus;
+    private String ticketStatus = "active";
 
 
     @ManyToOne
