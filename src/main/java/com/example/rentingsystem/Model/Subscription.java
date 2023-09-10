@@ -7,17 +7,15 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
-//@NoArgsConstructor
 public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +27,9 @@ public class Subscription {
 
     @Column(nullable = false,updatable = false)
     @Temporal(TemporalType.DATE)
-    LocalDate startDate = LocalDate.now();
+    private LocalDate startDate = LocalDate.now();
 
-    LocalDate endDate ;
+   private LocalDate endDate ;
 
     @NotEmpty(message = "should not be empty")
     @Column(columnDefinition = "varchar(30) not null")
