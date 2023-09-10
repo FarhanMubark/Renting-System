@@ -31,7 +31,7 @@ public class Employee {
     private String brithDay;
 
     @NotEmpty(message = "Should be not empty")
-    @Column(columnDefinition = "varchar(10) not null")
+    @Column(columnDefinition = "varchar(10) not null unique")
     private String phoneNumber;
 
 
