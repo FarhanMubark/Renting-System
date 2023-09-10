@@ -29,11 +29,11 @@ private final AuthService authService;
 
 
     // Admin or Employee
-    @PostMapping("/add-user")
-    public ResponseEntity AddUser(@RequestBody @Valid User user){
-        authService.addUser(user);
-        return ResponseEntity.status(200).body(new ApiResponse("User Added"));
-    }
+//    @PostMapping("/add-user")
+//    public ResponseEntity AddUser(@RequestBody @Valid User user){
+//        authService.addUser(user);
+//        return ResponseEntity.status(200).body(new ApiResponse("User Added"));
+//    }
 
     @PutMapping("/block-renter/{renter_id}")
     public ResponseEntity blockRenter(@PathVariable Integer renter_id){
