@@ -63,6 +63,9 @@ public class OrderSerivce {
         if(order.getIsreturned() == true){
             throw new ApiException("its already returned");
         }
+        if(rate > 5 || rate < 0){
+            throw new ApiException("invalid rate please rate from 0 to 5 ");
+        }
         if(renter.equals(order.getRenter())){
             // if the order is late
             if(order.getOrderBlockState() == true){
@@ -85,7 +88,7 @@ public class OrderSerivce {
                 Comment comment1 = new Comment(null,order.getRenterName(),rate,comment,order.getProduct().getLessor());
                 order.getProduct().getLessor().setNumberOfRenters(order.getProduct().getLessor().getNumberOfRenters()+1);
                 order.getProduct().getLessor().setRate((order.getProduct().getLessor().getRate()+rate)/order.getProduct().getLessor().getNumberOfRenters());
-                order.setProductStatus("Retured");
+                order.setProductStatus("Returned");
 
                 commentRepository.save(comment1);
                 orderRepository.save(order);
@@ -96,7 +99,7 @@ public class OrderSerivce {
                 order.setIsreturned(true);
                 order.setOrderIsActive(false);
                 order.getProduct().setProductStatus("Ready");
-                order.setProductStatus("Retured");
+                order.setProductStatus("Returned");
                 order.getProduct().setQuantity(order.getProduct().getQuantity() + order.getQuantity());
                 // Rate
                 Comment comment1 = new Comment(null,order.getRenterName(),rate,comment,order.getProduct().getLessor());

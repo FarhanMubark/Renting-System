@@ -46,20 +46,6 @@ public class LessorService {
        lessor1.setName(lessor.getName());
        lessorRepository.save(lessor1);
     }
-
-    public void assignLessorToSubscribe(Integer lessorId,Integer subscriptionId){
-        Subscription subscription = subscriptionRepository.findSubscriptionById(subscriptionId);
-        Lessor lessor = lessorRepository.findLessorById(lessorId);
-        if(lessor == null || subscription == null){
-            throw new ApiException("Can not subscribe");
-        }
-        else if(lessor.getSubscription().equals(subscription)){
-            throw new ApiException("You already have a subscription");
-        }
-        subscription.setLessor(lessor);
-        subscriptionRepository.save(subscription);
-    }
-
     public void lessorToSubscrive(Integer lessorId,Integer subscriptionNumber){
         Lessor lessor = lessorRepository.findLessorById(lessorId);
         if(lessor == null){
