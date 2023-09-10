@@ -130,5 +130,16 @@ public class ProductService {
         return productRepository.findProductsByProductStatus();
     }
 
+    public List<Product> getProductsByAvaliableAndPrice(){
+        return productRepository.getProductsByProductPriceAndProductStatus();
+    }
+
+    public List<Product> getProductsByAvaliableAndPriceDESC(){
+        return productRepository.findProductsByProductPriceAndProductStatus();
+    }
+
+    public List<Product> getProductsByName(String name){
+        return productRepository.findProductsByProductName(name);
+    }
 
 }

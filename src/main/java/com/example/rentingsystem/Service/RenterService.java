@@ -72,10 +72,8 @@ public void buyProduct( Integer renter_id , Integer productId, String typrOfDate
     if(product.getEndDate().compareTo(dateOrder) < 0){
         throw new ApiException("you cant buy product because the End date of this product is "+product.getEndDate());
     }
-    System.out.println(quantity+" "+dateOrder+" "+totalHours);
     orderSerivce.addOrder(product,renter,quantity,dateOrder,totalHours);
-}
-
+    }
 
 
 

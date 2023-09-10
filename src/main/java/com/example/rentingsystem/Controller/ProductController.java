@@ -55,5 +55,20 @@ public class ProductController {
         return  ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByAvaliable());
     }
 
+    @GetMapping("/get-products-available-by-price")
+    public ResponseEntity getProductsByAvailableStatusAndPrice(@AuthenticationPrincipal User user){
+        return  ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByAvaliableAndPrice());
+    }
+
+    @GetMapping("/get-products-available-by-price-desc")
+    public ResponseEntity getProductsByAvailableStatusAndPriceDESC(@AuthenticationPrincipal User user){
+        return  ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByAvaliableAndPriceDESC());
+    }
+
+    @GetMapping("/get-products-by-name/{productName}")
+    public ResponseEntity getProductsByName(@AuthenticationPrincipal User user,String productName){
+        return  ResponseEntity.status(HttpStatus.OK).body(productService.getProductsByName(productName));
+    }
+
 
 }

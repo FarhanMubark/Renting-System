@@ -83,6 +83,7 @@ public class OrderSerivce {
                     order.getProduct().setProductStatus("Ready");
                 }
                 order.getProduct().setQuantity(order.getProduct().getQuantity() + order.getQuantity());
+                order.getRenter().setNumberOfWarning(order.getRenter().getNumberOfWarning()+1);
                 order.setProduct(null);
                 orderRepository.save(order);
                 return "you have delayed :"+ totalHoursDelayed+" your extra price is now "+finalPrice;
@@ -93,7 +94,7 @@ public class OrderSerivce {
                 order.getProduct().setQuantity(order.getProduct().getQuantity() + order.getQuantity());
                 order.setProduct(null);
                 orderRepository.save(order);
-                return "Done ";
+                return "Done";
             }
         }else{
             throw new ApiException("order not yours");
