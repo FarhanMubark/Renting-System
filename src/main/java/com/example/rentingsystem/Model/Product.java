@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -33,12 +34,13 @@ public class Product {
 
     private String productStatus;
 
-    private Date endDate;
+    private LocalDateTime endDate;
 
+    private Integer quantity;
     private Integer review;
 
     @ManyToOne
-    @JoinColumn()
+    @JoinColumn(name = "lessor_id",referencedColumnName = "id")
     @JsonIgnore
     private Lessor lessor;
 

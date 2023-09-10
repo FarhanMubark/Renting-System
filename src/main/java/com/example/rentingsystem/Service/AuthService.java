@@ -64,7 +64,7 @@ public class AuthService {
         String hash = new BCryptPasswordEncoder().encode(renterDTO.getPassword());
         User user = new User(null,renterDTO.getUsername(),hash,"RENTER",null,null,null,null);
         authRepository.save(user);
-        Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getStatus(),renterDTO.getEmail(),null,null,null);
+        Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getStatus(),renterDTO.getEmail(),null,null,null,null);
         renter.setUser(user);
         renterRepository.save(renter);
     }

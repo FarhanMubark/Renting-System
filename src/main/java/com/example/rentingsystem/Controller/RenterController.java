@@ -2,6 +2,8 @@ package com.example.rentingsystem.Controller;
 
 import com.example.rentingsystem.Api.ApiResponse;
 import com.example.rentingsystem.DTOs.RenterDTO;
+
+import com.example.rentingsystem.Model.Product;
 import com.example.rentingsystem.Model.Renter;
 import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Service.RenterService;
@@ -33,5 +35,11 @@ public class RenterController {
         return ResponseEntity.status(200).body(renterService.getRenterByName(user.getRenter().getName()));
     }
 
+
+    @PostMapping("/buy-product/{product_id}/{typeOfDay}/{quantity}/{duration}")
+    public ResponseEntity updateProduct(@AuthenticationPrincipal User user,@PathVariable Integer product_id,@PathVariable String typeOfDay,@PathVariable Integer quantity,@PathVariable Integer duration){
+        renterService.buyProduct(user.getRenter().getId(),product_id,typeOfDay,quantity,duration);
+        return ResponseEntity.status(200).body(new ApiResponse("product bought successfully"));
+    }
 
 }

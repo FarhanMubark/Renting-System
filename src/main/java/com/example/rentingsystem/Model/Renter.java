@@ -36,6 +36,8 @@ public class Renter {
     @Column(columnDefinition = "varchar(50) not null")
     private String email;
 
+    private Integer numberOfWarning = 0 ;
+
     @OneToOne
     @JsonIgnore
     private User user;
