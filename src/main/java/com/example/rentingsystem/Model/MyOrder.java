@@ -27,6 +27,8 @@ public class MyOrder {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String productStatus;
+
     private String LessorUsername;
 
     private String productName;
