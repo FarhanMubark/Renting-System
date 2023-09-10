@@ -42,7 +42,6 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/registers/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 // allow any one to reach this endpoint
                 .requestMatchers("/api/v1/employees/**").hasAuthority("ADMIN")
-
                 .requestMatchers("/api/v1/products/add/**").hasAuthority("LESSOR")
 
 

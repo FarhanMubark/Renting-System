@@ -27,6 +27,9 @@ public class ProductService {
     public void addProduct(Integer lessor_id, String typeOfDate,Integer duration ,Product product) {
         Lessor lessor = lessorRepository.findLessorById(lessor_id);
 
+        if(lessor.getSubscription() == null) {
+            throw new ApiException("you do not have a subscription");
+        }
         if(product.getQuantity() <= 0){
             throw new ApiException("you cannot buy with Zero quantity or less");
         }
@@ -48,7 +51,7 @@ public class ProductService {
         Product product1 = productRepository.findProductById(productId);
         Lessor lessor = lessorRepository.findLessorById(lessor_id);
         if (lessor != null) {
-            throw new ApiException("Worng lessor id");
+            throw new ApiException("Wrong lessor id");
         }
         if(product1 == null){
             throw new ApiException("Product not found");

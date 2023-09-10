@@ -1,14 +1,8 @@
 package com.example.rentingsystem.Service;
 
 import com.example.rentingsystem.Api.ApiException;
-import com.example.rentingsystem.Model.Lessor;
-import com.example.rentingsystem.Model.MyOrder;
-import com.example.rentingsystem.Model.Product;
-import com.example.rentingsystem.Model.Renter;
-import com.example.rentingsystem.Repository.LessorRepository;
-import com.example.rentingsystem.Repository.OrderRepository;
-import com.example.rentingsystem.Repository.ProductRepository;
-import com.example.rentingsystem.Repository.RenterRepository;
+import com.example.rentingsystem.Model.*;
+import com.example.rentingsystem.Repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +15,7 @@ import java.util.List;
 public class OrderSerivce {
     private final OrderRepository orderRepository;
     private final ProductRepository productRepository;
-    private final LessorRepository lessorRepository;
+    private final CommentRepository commentRepository;
     private final RenterRepository renterRepository;
 
 
@@ -56,7 +50,7 @@ public class OrderSerivce {
     }
 
     // Employee
-    public String isReturnedProduct(Integer renter_id,Integer order_id){
+    public String isReturnedProduct(Integer renter_id,Integer order_id, Double rate,String comment){
         Renter renter = renterRepository.findRenterById(renter_id);
         Integer totalHoursDelayed = 1;
         if(renter == null){
@@ -70,7 +64,9 @@ public class OrderSerivce {
             throw new ApiException("its already returned");
         }
         if(renter.equals(order.getRenter())){
+            // if the order is late
             if(order.getOrderBlockState() == true){
+                // getting totalprice after he got delayed
                 LocalDateTime dateNow = LocalDateTime.now();
                 Duration duration = Duration.between(order.getEndDate(),dateNow);
                 totalHoursDelayed =(int) duration.toHours();
@@ -84,6 +80,15 @@ public class OrderSerivce {
                 }
                 order.getProduct().setQuantity(order.getProduct().getQuantity() + order.getQuantity());
                 order.getRenter().setNumberOfWarning(order.getRenter().getNumberOfWarning()+1);
+
+                // Rate
+                Comment comment1 = new Comment(null,order.getRenterName(),rate,comment,order.getProduct().getLessor());
+                order.getProduct().getLessor().setNumberOfRenters(order.getProduct().getLessor().getNumberOfRenters()+1);
+                order.getProduct().getLessor().setRate((order.getProduct().getLessor().getRate()+rate)/order.getProduct().getLessor().getNumberOfRenters());
+                order.setProductStatus("Retured");
+
+                commentRepository.save(comment1);
+                orderRepository.save(order);
                 order.setProduct(null);
                 orderRepository.save(order);
                 return "you have delayed :"+ totalHoursDelayed+" your extra price is now "+finalPrice;
@@ -91,7 +96,14 @@ public class OrderSerivce {
                 order.setIsreturned(true);
                 order.setOrderIsActive(false);
                 order.getProduct().setProductStatus("Ready");
+                order.setProductStatus("Retured");
                 order.getProduct().setQuantity(order.getProduct().getQuantity() + order.getQuantity());
+                // Rate
+                Comment comment1 = new Comment(null,order.getRenterName(),rate,comment,order.getProduct().getLessor());
+                order.getProduct().getLessor().setNumberOfRenters(order.getProduct().getLessor().getNumberOfRenters()+1);
+                order.getProduct().getLessor().setRate((order.getProduct().getLessor().getRate()+rate)/order.getProduct().getLessor().getNumberOfRenters());
+                commentRepository.save(comment1);
+                orderRepository.save(order);
                 order.setProduct(null);
                 orderRepository.save(order);
                 return "Done";
