@@ -20,9 +20,6 @@ public class EmployeeDTO {
     private String password;
 
     @NotEmpty(message = "Should not be empty")
-    private String name;
-
-    @NotEmpty(message = "Should not be empty")
     private String phoneNumber;
 
     @NotEmpty(message = "Should not be empty")

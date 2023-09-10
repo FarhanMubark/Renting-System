@@ -3,11 +3,13 @@ package com.example.rentingsystem.Controller;
 import com.example.rentingsystem.Api.ApiResponse;
 import com.example.rentingsystem.DTOs.EmployeeDTO;
 import com.example.rentingsystem.Model.Employee;
+import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Service.EmployeeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,22 +24,22 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployees());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity addEmployee (@RequestBody @Valid EmployeeDTO employeeDTO){
-        employeeService.addEmployee(employeeDTO);
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("employee added "));
+    @PostMapping("/assing-{warehouseId}")
+    public ResponseEntity assignEmployee(@AuthenticationPrincipal User user, @PathVariable Integer warehouseId){
+        employeeService.assignEmployeeToWarehouse(user.getEmployee().getId(),warehouseId);
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Employee  assigned"));
     }
 
-    @PutMapping("/{employeeId}")
-    public ResponseEntity updateEmployee (@RequestBody @Valid Employee employee,@PathVariable Integer employeeId){
-        employeeService.updateEmployee(employee, employeeId);
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("employee updated "));
-    }
-    @DeleteMapping("/{employeeId}")
-    public ResponseEntity removeEmployee (@PathVariable Integer employeeId){
-        employeeService.removeEmployee(employeeId);
-        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("employee deleted "));
+    @PutMapping("/update")
+    public ResponseEntity update(@AuthenticationPrincipal User user ,@RequestBody Employee employee){
+       employeeService.update(user.getEmployee().getId(),employee);
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Employee  updated"));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity search(@AuthenticationPrincipal User user){
+
+        return ResponseEntity.status(HttpStatus.OK).body( employeeService.getEmployeeByName(user.getEmployee().getEmployeeName()));
+    }
 
 }

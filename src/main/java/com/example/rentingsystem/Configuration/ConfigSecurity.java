@@ -40,6 +40,9 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/tickets/get-by-id/{ticket_id}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/tickets/resolve-ticket/{ticket_id}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/registers/get").hasAnyAuthority("ADMIN","EMPLOYEE")
+                // allow any one to reach this endpoint
+                .requestMatchers("/api/v1/employees/**").hasAuthority("ADMIN")
+
                 .anyRequest().permitAll()
                 .and()
                 .logout()

@@ -6,8 +6,10 @@ import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.Model.Employee;
 import com.example.rentingsystem.Model.Lessor;
 import com.example.rentingsystem.Model.User;
+import com.example.rentingsystem.Model.Warehouse;
 import com.example.rentingsystem.Repository.AuthRepository;
 import com.example.rentingsystem.Repository.EmployeeRepository;
+import com.example.rentingsystem.Repository.WarehouseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,47 +20,39 @@ import java.util.List;
 public class EmployeeService {
     private final AuthRepository authRepository;
     private  final EmployeeRepository employeeRepository;
+    private final WarehouseRepository warehouseRepository;
 
     public List<Employee> getEmployees(){
         return employeeRepository.findAll();
     }
 
-
-    public void addEmployee(EmployeeDTO employeeDTO){
-        User user = authRepository.findUserById(employeeDTO.getUser_id());
-
-        if(employeeDTO.getUsername() == null || employeeDTO.getPassword() == null){
-            throw new ApiException("username or password cannot be null");
-        }
-
-
-                Employee employee = new Employee();
-                employee.setEmployeeName(employeeDTO.getEmployeeName());
-                employee.setBrithDay(employee.getBrithDay());
-                employee.setAge(employee.getAge());
-                employee.setPhoneNumber(employee.getPhoneNumber());
-                employee.setUser(user);
-                employeeRepository.save(employee);
-    }
-
-    public void updateEmployee(Employee employee,Integer employeeId){
+    public void assignEmployeeToWarehouse(Integer employeeId ,Integer warehouseId ){
+        Warehouse warehouse1 = warehouseRepository.findWarehouseById(warehouseId);
         Employee employee1 = employeeRepository.findEmployeeById(employeeId);
-        if(employee1 == null){
-            throw new ApiException("employee not found");
+        if (warehouse1 == null || employee1 == null){
+            throw new ApiException("Can not assign");
         }
-        employee1.setPhoneNumber(employee.getPhoneNumber());
-        employee1.setAge(employee.getAge());
-        employee1.setEmployeeName(employee.getEmployeeName());
+        employee1.setWarehouse(warehouse1);
         employeeRepository.save(employee1);
     }
 
-    public void removeEmployee(Integer employeeId){
-        Employee employee1 = employeeRepository.findEmployeeById(employeeId);
-        if(employee1 == null){
-            throw new ApiException("employee not found");
-        }
-        employeeRepository.delete(employee1);
+    public void update(Integer employeeId,Employee employee){
+      Employee employee1 = employeeRepository.findEmployeeById(employeeId);
+      if (employee == null){
+          throw new ApiException("Can not found");
+      }
+      employee1.setEmployeeName(employee.getEmployeeName());
+      employee1.setPhoneNumber(employee.getPhoneNumber());
+      employee1.setAge(employee.getAge());
+      employeeRepository.save(employee1);
     }
 
+    public Employee getEmployeeByName(String employeeName){
+        Employee employee = employeeRepository.findEmployeeByEmployeeName(employeeName);
+        if (employee == null){
+            throw new ApiException("Can not find employee");
+        }
+        return employee;
+    }
 
 }

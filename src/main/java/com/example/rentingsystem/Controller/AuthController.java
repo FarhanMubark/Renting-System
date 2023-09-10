@@ -1,13 +1,16 @@
 package com.example.rentingsystem.Controller;
 
 import com.example.rentingsystem.Api.ApiResponse;
+import com.example.rentingsystem.DTOs.EmployeeDTO;
 import com.example.rentingsystem.DTOs.LessorDTO;
 import com.example.rentingsystem.DTOs.RenterDTO;
 import com.example.rentingsystem.Model.User;
 import com.example.rentingsystem.Service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,11 +21,11 @@ public class AuthController {
 private final AuthService authService;
 
 
-
     @GetMapping("/get")
     public ResponseEntity getUsers(){
         return ResponseEntity.status(200).body(authService.getUsers());
     }
+
 
 
     // Admin or Employee
@@ -54,6 +57,28 @@ private final AuthService authService;
         authService.addLessor(lessorDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Lessor Added"));
     }
+    @PostMapping("/add-employee")
+    public ResponseEntity addEmployee(@RequestBody @Valid EmployeeDTO employeeDTO){
+        authService.addEmployee(employeeDTO);
+        return ResponseEntity.status(200).body(new ApiResponse("Employee Added"));
+    }
 
+
+    @DeleteMapping("/delete/{userName}")
+    public ResponseEntity deleteUser(@PathVariable String userName){
+        authService.deleted(userName);
+        return ResponseEntity.status(200).body(new ApiResponse("User deleted"));
+    }
+
+    @GetMapping("/getinfo/{userName}")
+    public ResponseEntity getInfo(@PathVariable String userName){
+        return ResponseEntity.status(200).body(authService.getInfo(userName));
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity update(@AuthenticationPrincipal User user, @RequestBody @Valid User newUser) {
+        authService.update(user.getUsername(), newUser);
+        return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("updated successfully"));
+    }
 
 }
