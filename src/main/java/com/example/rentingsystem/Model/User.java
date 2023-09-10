@@ -31,7 +31,6 @@ public class User implements UserDetails {
 
     private String role;
 
-
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @PrimaryKeyJoinColumn
     private Renter renter;
