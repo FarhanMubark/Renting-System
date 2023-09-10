@@ -33,4 +33,13 @@ public class RenterService {
         renterRepository.save(renter1);
     }
 
+    public Renter getRenterByName(String name){
+        Renter renter = renterRepository.findRenterByName(name);
+
+        if(renter == null){
+            throw new ApiException("Could not find");
+        }
+        return renter;
+    }
+
 }

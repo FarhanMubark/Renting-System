@@ -36,4 +36,10 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Employee  updated"));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity search(@AuthenticationPrincipal User user){
+
+        return ResponseEntity.status(HttpStatus.OK).body( employeeService.getEmployeeByName(user.getEmployee().getEmployeeName()));
+    }
+
 }

@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface RenterRepository extends JpaRepository<Renter,Integer> {
 
     Renter findRenterById(Integer renterId);
+    Renter findRenterByName(String name);
 }

@@ -28,5 +28,10 @@ public class RenterController {
         return ResponseEntity.status(200).body(new ApiResponse("Renter updated"));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity findRenterByName(@AuthenticationPrincipal User user){
+        return ResponseEntity.status(200).body(renterService.getRenterByName(user.getRenter().getName()));
+    }
+
 
 }

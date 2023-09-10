@@ -10,4 +10,6 @@ public interface LessorRepository extends JpaRepository<Lessor,Integer> {
     Lessor findLessorById(Integer leesorId);
     Lessor findLessorByName(String name);
 
+
+
 }

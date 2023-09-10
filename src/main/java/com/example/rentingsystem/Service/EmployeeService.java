@@ -47,4 +47,12 @@ public class EmployeeService {
       employeeRepository.save(employee1);
     }
 
+    public Employee getEmployeeByName(String employeeName){
+        Employee employee = employeeRepository.findEmployeeByEmployeeName(employeeName);
+        if (employee == null){
+            throw new ApiException("Can not find employee");
+        }
+        return employee;
+    }
+
 }

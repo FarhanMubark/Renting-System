@@ -47,4 +47,14 @@ public class LessorController {
         return ResponseEntity.status(200).body(new ApiResponse("Lessor subscribed"));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity findLessorByName(@AuthenticationPrincipal User user ){
+        return ResponseEntity.status(200).body(lessorService.getLessorByName(user.getLessor().getName()));
+    }
+
+    @GetMapping("/findMySubscriber")
+    public ResponseEntity findMySubscriber(@AuthenticationPrincipal User user){
+        return ResponseEntity.status(200).body(lessorService.getMySubscriptions(user.getLessor().getId()));
+    }
+
 }
