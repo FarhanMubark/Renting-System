@@ -34,6 +34,7 @@ public class ProductService {
         if(product.getQuantity() <= 0){
             throw new ApiException("you cannot buy with Zero quantity or less");
         }
+        // Adding duration for current date time
         LocalDateTime dateProduct = LocalDateTime.now();
         if(typeOfDate.equals("day") ){
             dateProduct = dateProduct.plusDays(duration);
@@ -117,6 +118,9 @@ public class ProductService {
         if(product == null){
             throw new ApiException("Product not found");
         }
+        if(product.getLessor().getSubscription() == null){
+            throw new ApiException("You do not have a Subscription");
+        }
         if(product.getLessor() != lessor){
             throw new ApiException("this is not your product to be expanded");
         }
@@ -129,6 +133,14 @@ public class ProductService {
             product.setEndDate(product.getEndDate().plusHours(duration));
         }else{
             throw new ApiException("please enter day or hour ");
+        }
+        if(product.getEndDate().toLocalDate().compareTo(product.getLessor().getSubscription().getEndDate()) > 0){
+            throw new ApiException("you cannot add more than subscription end date");
+        }
+        if(product.getQuantity() == 0 ){
+            product.setProductStatus("Unavailable");
+        }else{
+            product.setProductStatus("Ready");
         }
         productRepository.save(product);
     }

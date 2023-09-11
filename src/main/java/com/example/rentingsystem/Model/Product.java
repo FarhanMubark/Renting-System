@@ -44,6 +44,8 @@ public class Product {
     @Column(columnDefinition = "varchar(50) not null")
     private String productCategory;
 
+    @Column(columnDefinition = "varchar(25)")
+
     private String productStatus;
 
     private LocalDateTime endDate;
