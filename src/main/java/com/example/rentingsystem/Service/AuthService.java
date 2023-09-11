@@ -39,7 +39,7 @@ public class AuthService {
         user.setPassword(hash);
         authRepository.save(user);
     }
-    //
+    //.
     public void setBlockToRenter(Integer renter_id){
         Renter renter = renterRepository.findRenterById(renter_id);
 
