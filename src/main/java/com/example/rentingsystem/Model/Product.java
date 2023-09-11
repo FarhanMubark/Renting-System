@@ -37,12 +37,14 @@ public class Product {
     private Integer productPrice;
 
     @NotEmpty(message = "Product Description should not be Empty")
-    @Column(columnDefinition = "varchar(50) not null")
+    @Column(columnDefinition = "varchar(100) not null")
     private String productDescription;
 
     @NotEmpty(message = "Product Category should not be empty")
     @Column(columnDefinition = "varchar(50) not null")
     private String productCategory;
+
+    @Column(columnDefinition = "varchar(25)")
 
     private String productStatus;
 
