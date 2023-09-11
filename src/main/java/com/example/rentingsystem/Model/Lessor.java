@@ -29,12 +29,12 @@ public class Lessor {
     private String email;
 
     @NotEmpty(message = "Should not be empty")
-    @Column(columnDefinition = "varchar(20) not null")
-    private String status;
-
-    @NotEmpty(message = "Should not be empty")
     @Column(columnDefinition = "varchar(20) not null unique")
     private String phoneNumber;
+
+    private Double rate = 0.0;
+
+    private Integer numberOfRenters = 0;
 
     private Double balance = 0.0;
 
@@ -60,6 +60,9 @@ public class Lessor {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
     private Set<Ticket> tickets;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy ="lessor")
+    private Set<Comment> commentSet;
 
 
 

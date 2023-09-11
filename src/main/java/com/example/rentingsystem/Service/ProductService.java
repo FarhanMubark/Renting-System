@@ -27,6 +27,10 @@ public class ProductService {
     public void addProduct(Integer lessor_id, String typeOfDate,Integer duration ,Product product) {
         Lessor lessor = lessorRepository.findLessorById(lessor_id);
 
+
+        if(lessor.getSubscription() == null) {
+            throw new ApiException("you do not have a subscription");
+        }
         if(product.getQuantity() <= 0){
             throw new ApiException("you cannot buy with Zero quantity or less");
         }
@@ -40,6 +44,9 @@ public class ProductService {
         }
         product.setProductStatus("Ready");
         product.setEndDate(dateProduct);
+        if(product.getEndDate().toLocalDate().compareTo(lessor.getSubscription().getEndDate()) > 0 ){
+            throw new ApiException("your final subscription is "+lessor.getSubscription().getEndDate()+"and what you asked for is "+product.getEndDate());
+        }
         product.setLessor(lessor);
         productRepository.save(product);
     }
@@ -48,7 +55,7 @@ public class ProductService {
         Product product1 = productRepository.findProductById(productId);
         Lessor lessor = lessorRepository.findLessorById(lessor_id);
         if (lessor != null) {
-            throw new ApiException("Worng lessor id");
+            throw new ApiException("Wrong lessor id");
         }
         if(product1 == null){
             throw new ApiException("Product not found");
@@ -84,6 +91,10 @@ public class ProductService {
 
         if(product1 == null){
             throw new ApiException("Product not found");
+        }
+
+        if(product1.getMyOrderSet() != null){
+            throw new ApiException("still you can't delete this product until order is finish");
         }
         if(user.getRole().equals("ADMIN")) {
             product1.setLessor(null);

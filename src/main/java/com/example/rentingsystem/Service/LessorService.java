@@ -59,13 +59,13 @@ public class LessorService {
             subscriptionRepository.save(subscription);
         }
         else if(subscriptionNumber == 2){
-            Subscription subscription = new Subscription(null,2700,"8*8",lessor);
+            Subscription subscription = new Subscription(null,2700,"4*4",lessor);
             LocalDate endDate = date.plusMonths(6);
             subscription.setEndDate(endDate);
             subscriptionRepository.save(subscription);
         }
         else if(subscriptionNumber == 3){
-            Subscription subscription = new Subscription(null,1000,"4*4",lessor);
+            Subscription subscription = new Subscription(null,1000,"8*8",lessor);
             LocalDate endDate = date.plusMonths(1);
             subscription.setEndDate(endDate);
             subscriptionRepository.save(subscription);
