@@ -96,6 +96,7 @@ public class ScheduleService {
                     if(products != null) {
                         for(Product product : products) {
                             product.setProductStatus("Unavailable");
+                            productRepository.save(product);
                         }
                     }
                     subscription.setLessor(null);
