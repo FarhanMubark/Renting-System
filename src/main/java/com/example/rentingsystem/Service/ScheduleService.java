@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 
 @Service
@@ -91,6 +92,13 @@ public class ScheduleService {
         if(subscriptions != null) {
             for (Subscription subscription : subscriptions) {
                 if (date.compareTo(subscription.getEndDate()) > 0) {
+                    List<Product> products= productRepository.findProductsByLessor(subscription.getLessor());
+                    if(products != null) {
+                        for(Product product : products) {
+                            product.setProductStatus("Unavailable");
+                        }
+                    }
+                    subscription.setLessor(null);
                     subscriptionRepository.delete(subscription);
                     logger.info(subscription.getLessor().getUser().getUsername()+" user subscription is done");
                 }
