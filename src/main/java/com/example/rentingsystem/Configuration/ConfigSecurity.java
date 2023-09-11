@@ -87,7 +87,8 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/renters/search").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/renters/update").hasAnyAuthority("ADMIN","RENTER")
 
-                .requestMatchers("/api/v1/products/add/**").hasAuthority("LESSOR")
+                .requestMatchers("/api/v1/products/**").hasAuthority("LESSOR")
+                .requestMatchers("/api/v1/products/").hasAuthority("LESSOR")
 
                 .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("AMDIN")
                 .requestMatchers("/api/v1/employees/search").hasAuthority("ADMIN")

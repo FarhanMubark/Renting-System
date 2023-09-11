@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +32,7 @@ public class Product {
     @Column(columnDefinition = "varchar(25) not null")
     private String productNumber;
 
-    @NotEmpty(message = "Should Not be empty")
+    @NotNull(message = "Should Not be empty")
     @Column(columnDefinition = "int not null")
     private Integer productPrice;
 
@@ -49,7 +50,7 @@ public class Product {
 
     private LocalDateTime endDate;
 
-    @NotEmpty(message = "Should Not be empty")
+    @NotNull(message = "Should Not be empty")
     @Column(columnDefinition = "int not null")
     private Integer quantity;
 
