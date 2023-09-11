@@ -23,7 +23,7 @@ public class TicketController {
         return ResponseEntity.status(HttpStatus.OK).body(ticketService.getTickets());
     }
 
-    @GetMapping("get-by-id/{ticket_id}")
+    @GetMapping("/get-by-id/{ticket_id}")
     public ResponseEntity getTicketById(@PathVariable Integer ticket_id){
         Ticket ticket = ticketService.getTicketById(ticket_id);
 
@@ -69,13 +69,13 @@ public class TicketController {
         ticketService.deleteRenterTicket(user.getRenter().getId(), ticket_id);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("delete ticket"));
     }
-    @PutMapping("update-r-ticket/{ticket_id}")
+    @PutMapping("/update-r-ticket/{ticket_id}")
     public ResponseEntity updateRenterTickets (@AuthenticationPrincipal User user, @PathVariable Integer ticket_id, @RequestBody @Valid Ticket ticket) {
         ticketService.updateRenterTicket(user.getRenter().getId(),ticket_id,ticket);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Ticket Updated"));
     }
 
-    @PutMapping("update-l-ticket/{ticket_id}")
+    @PutMapping("/update-l-ticket/{ticket_id}")
     public ResponseEntity updateLessorTickets(@AuthenticationPrincipal User user, @PathVariable Integer ticket_id, @RequestBody @Valid Ticket ticket){
         ticketService.updateLessorTicket(user.getLessor().getId(), ticket_id, ticket);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Ticket Updated"));

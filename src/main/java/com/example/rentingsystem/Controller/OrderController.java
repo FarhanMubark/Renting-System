@@ -21,9 +21,9 @@ public class OrderController {
     }
 
 
-    @PutMapping("/is-return/{renter_id}/{order_id}")
-    public ResponseEntity isReturnOrder(@AuthenticationPrincipal User user, @PathVariable Integer renter_id,@PathVariable Integer order_id){
-        return ResponseEntity.status(200).body(new ApiResponse(orderSerivce.isReturnedProduct(renter_id,order_id)));
+    @PutMapping("/is-return/{renter_id}/{order_id}/{rate}/{comment}")
+    public ResponseEntity isReturnOrder(@AuthenticationPrincipal User user, @PathVariable Integer renter_id,@PathVariable Integer order_id,@PathVariable Double rate ,@PathVariable String comment){
+        return ResponseEntity.status(200).body(new ApiResponse(orderSerivce.isReturnedProduct(renter_id,order_id,rate,comment)));
     }
 
     @GetMapping("/show-my-orders")

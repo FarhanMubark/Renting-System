@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
     private final ProductService productService;
 
-    @GetMapping("/")
+    @GetMapping("/get")
     public ResponseEntity getProducts(){
         return  ResponseEntity.status(HttpStatus.OK).body(productService.getProducts());
     }

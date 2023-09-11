@@ -24,15 +24,15 @@ public class RenterController {
         return ResponseEntity.status(200).body(renterService.getRenters());
     }
 
-    @PutMapping("/update")
-    public ResponseEntity update(@AuthenticationPrincipal User user , @RequestBody Renter renter){
-        renterService.update(user.getRenter().getId(),renter);
+    @PutMapping("/update-{renter_id}")
+    public ResponseEntity update(@PathVariable Integer renter_id , @RequestBody Renter renter){
+        renterService.update(renter_id,renter);
         return ResponseEntity.status(200).body(new ApiResponse("Renter updated"));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity findRenterByName(@AuthenticationPrincipal User user){
-        return ResponseEntity.status(200).body(renterService.getRenterByName(user.getRenter().getName()));
+    @GetMapping("/search-{name}")
+    public ResponseEntity findRenterByName(@PathVariable String name){
+        return ResponseEntity.status(200).body(renterService.getRenterByName(name));
     }
 
 

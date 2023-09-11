@@ -46,11 +46,15 @@ public class MyOrder {
     private LocalDateTime endDate;
 
     private String renterName;
+
     private String phoneNumber;
+
     private Boolean isreturned = false;
+
     private Boolean orderIsActive;
     // if user is still didn't give us the lessor product
     private Boolean orderBlockState;
+
     private LocalDateTime finalWarningDate;
 
 //    @NotNull(message = "Should be not null")

@@ -48,6 +48,9 @@ public class ImageDataService {
         }
         Optional<ImageData> dbImageData = Optional.ofNullable(imageDataRepository.findByName(fileName));
         byte[] images=ImageUtil.decompressImage(dbImageData.get().getImageData());
+        if (images == null){
+            throw new ApiException("Image Not found");
+        }
         return images;
     }
 

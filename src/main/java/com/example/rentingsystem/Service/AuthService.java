@@ -64,7 +64,7 @@ public class AuthService {
         String hash = new BCryptPasswordEncoder().encode(renterDTO.getPassword());
         User user = new User(null,renterDTO.getUsername(),hash,"RENTER",null,null,null,null);
         authRepository.save(user);
-        Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getStatus(),renterDTO.getEmail(),null,null,null,null);
+        Renter renter = new Renter(null,renterDTO.getPhoneNumber(),renterDTO.getName(),renterDTO.getEmail(),0,null,null,null);
         renter.setUser(user);
         renterRepository.save(renter);
     }
@@ -76,7 +76,7 @@ public class AuthService {
         User user = new User(null,lessorDTO.getUsername(),hash,"LESSOR",null,null,null,null);
         authRepository.save(user);
 
-        Lessor lessor = new Lessor(null,lessorDTO.getName(),lessorDTO.getEmail(),lessorDTO.getStatus(),lessorDTO.getPhoneNumber(),0.0,null,null,null,null,null);
+        Lessor lessor = new Lessor(null,lessorDTO.getName(),lessorDTO.getEmail(),lessorDTO.getPhoneNumber(),0.0,0,0.0,null,null,null,null,null,null);
         lessor.setUser(user);
         lessorRepository.save(lessor);
     }

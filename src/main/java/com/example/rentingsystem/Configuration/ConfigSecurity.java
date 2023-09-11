@@ -54,7 +54,7 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/registers/add-renter").permitAll()
                 .requestMatchers("/api/v1/registers/add-lessors").permitAll()
                 .requestMatchers("/api/v1/registers/add-employee").hasAuthority("ADMIN")
-                .requestMatchers("/api/v1/registers/get").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/registers/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/registers/getinfo").hasAnyAuthority("ADMIN","RENTER","LESSOR")
                 .requestMatchers("/api/v1/registers/delete/{userName}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/registers/block-renter/{renter_id}").hasAuthority("ADMIN")
@@ -63,12 +63,13 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/tickets/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/tickets/get-by-id/{ticket_id}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/tickets/resolve-ticket/{ticket_id}").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/employees/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/tickets/add-l-ticket").hasAuthority("LESSOR")
-                .requestMatchers("/api/v1/tickets/get-l-ticket").hasAuthority("LESSOR")
+                .requestMatchers("/api/v1/tickets/get-l-tickets").hasAuthority("LESSOR")
                 .requestMatchers("/api/v1/tickets/update-l-ticket/{ticket_id}").hasAuthority("LESSOR")
                 .requestMatchers("/api/v1/tickets/delete-l-ticket/{ticket_id}").hasAuthority("LESSOR")
                 .requestMatchers("/api/v1/tickets/add-r-ticket").hasAuthority("RENTER")
-                .requestMatchers("/api/v1/tickets/get-r-ticket").hasAuthority("RENTER")
+                .requestMatchers("/api/v1/tickets/get-r-tickets").hasAuthority("RENTER")
                 .requestMatchers("/api/v1/tickets/update-r-ticket/{ticket_id}").hasAuthority("RENTER")
                 .requestMatchers("/api/v1/tickets/delete-r-ticket/{ticket_id}").hasAuthority("RENTER")
 
@@ -78,7 +79,7 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/subscriptions/update/{subscriptionId}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/subscriptions/{subscriptionId}").hasAuthority("ADMIN")
 
-                .requestMatchers("/api/v1/lessors/subscriber-{subscriberNumber}").hasAuthority("LESSER")
+                .requestMatchers("/api/v1/lessors/subscriber-{subscriberNumber}").hasAuthority("LESSOR")
                 .requestMatchers("/api/v1/lessors/assing-{warehouseId}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/lessors/search").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/lessors/update").hasAnyAuthority("ADMIN","LESSOR")
@@ -87,13 +88,30 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/renters/search").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/renters/update").hasAnyAuthority("ADMIN","RENTER")
 
-                .requestMatchers("/api/v1/products/**").hasAuthority("LESSOR")
-                .requestMatchers("/api/v1/products/").hasAuthority("LESSOR")
+
+
 
                 .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("AMDIN")
                 .requestMatchers("/api/v1/employees/search").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/employees/update").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/employees/").hasAuthority("ADMIN")
+
+                .requestMatchers("/api/v1/products/get").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/products/add/{typeOfDate}/{duration}").hasAuthority("LESSOR")
+                .requestMatchers("/api/v1/update/{productId}/{typeOfDate}/{duration}").hasAuthority("LESSOR")
+                .requestMatchers("/api/v1/products/delete/{productId}").hasAnyAuthority("ADMIN","LESSOR")
+                .requestMatchers("/api/v1/products/expand-duration/{productId}/{typeOfDate}/{duration}").hasAuthority("LESSOR")
+                .requestMatchers("/api/v1/products/get-products-by-lessor").hasAnyAuthority("ADMIN","LESSOR","RENTER")
+                .requestMatchers("/api/v1/products/get-products-available/").hasAnyAuthority("ADMIN","LESSOR","RENTER")
+                .requestMatchers("/api/v1/products/get-products-available-by-price").hasAnyAuthority("ADMIN","LESSOR","RENTER")
+                .requestMatchers("/api/v1/products/get-products-available-by-price-desc").hasAnyAuthority("ADMIN","LESSOR","RENTER")
+                .requestMatchers("/api/v1/products/get-products-by-name/{productName}").hasAnyAuthority("ADMIN","LESSOR","RENTER")
+
+                .requestMatchers("/api/v1/orders/get").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/orders/is-return/{renter_id}/{order_id}/{rate}/{comment}").hasAuthority("RENTER")
+                .requestMatchers("/api/v1/orders/show-my-orders").hasAuthority("RENTER")
+
+
 
                 .requestMatchers("/api/v1/image/upload/{product_id}").hasAuthority("LESSOR")
                 .requestMatchers("/api/v1/image/upload/download/{fileName}/{product_id}").hasAnyAuthority("ADMIN", "LESSOR")

@@ -24,9 +24,9 @@ public class EmployeeController {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployees());
     }
 
-    @PostMapping("/assing-{warehouseId}")
-    public ResponseEntity assignEmployee(@AuthenticationPrincipal User user, @PathVariable Integer warehouseId){
-        employeeService.assignEmployeeToWarehouse(user.getEmployee().getId(),warehouseId);
+    @PostMapping("/{employeeId}-assing-{warehouseId}")
+    public ResponseEntity assignEmployee(@PathVariable Integer employeeId, @PathVariable Integer warehouseId){
+        employeeService.assignEmployeeToWarehouse(employeeId,warehouseId);
         return ResponseEntity.status(HttpStatus.OK).body(new ApiResponse("Employee  assigned"));
     }
 
