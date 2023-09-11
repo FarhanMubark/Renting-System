@@ -85,13 +85,12 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/lessors/update").hasAnyAuthority("ADMIN","LESSOR")
 
                 .requestMatchers("/api/v1/renters/buy-product/{product_id}/{typeOfDay}/{quantity}/{duration}").hasAuthority("RENTER")
-                .requestMatchers("/api/v1/renters/search").hasAuthority("ADMIN")
+                .requestMatchers("/api/v1/renters/renter-info").hasAuthority("RENTER")
                 .requestMatchers("/api/v1/renters/update").hasAnyAuthority("ADMIN","RENTER")
 
-
-
-
                 .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("AMDIN")
+
+                .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/employees/search").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/employees/update").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/employees/").hasAuthority("ADMIN")
@@ -111,6 +110,8 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/orders/is-return/{renter_id}/{order_id}/{rate}/{comment}").hasAuthority("RENTER")
                 .requestMatchers("/api/v1/orders/show-my-orders").hasAuthority("RENTER")
 
+                .requestMatchers("/api/v1/comments/show-my-orders").hasAnyAuthority("RENTER","ADMIN")
+                .requestMatchers("/api/v1/orders/show-my-orders").hasAnyAuthority("RENTER","ADMIN")
 
 
                 .requestMatchers("/api/v1/image/upload/{product_id}").hasAuthority("LESSOR")
