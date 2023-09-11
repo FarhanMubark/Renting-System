@@ -2,9 +2,12 @@ package com.example.rentingsystem.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
 import jakarta.validation.constraints.Positive;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,18 +45,24 @@ public class Product {
 
     @NotEmpty(message = "Product Category should not be empty")
     @Column(columnDefinition = "varchar(50) not null")
+
     private String productCategory;
 
+
     @Column(columnDefinition = "varchar(25)")
+
+
 
     private String productStatus;
 
     private LocalDateTime endDate;
 
+
     @Positive(message = "Quantity must be positive")
     @NotNull(message = "Quantity should not be null")
     @Column(columnDefinition = "int not null")
     private Integer quantity;
+
 
     @ManyToOne
     @JoinColumn(name = "lessor_id",referencedColumnName = "id")
@@ -62,7 +71,5 @@ public class Product {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy ="product")
     private Set<MyOrder> myOrderSet;
-
-
 
 }

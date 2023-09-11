@@ -54,7 +54,6 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/registers/add-renter").permitAll()
                 .requestMatchers("/api/v1/registers/add-lessors").permitAll()
                 .requestMatchers("/api/v1/registers/add-employee").hasAuthority("ADMIN")
-                //.requestMatchers("/api/v1/registers/get").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/registers/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/registers/getinfo").hasAnyAuthority("ADMIN","RENTER","LESSOR")
                 .requestMatchers("/api/v1/registers/delete/{userName}").hasAuthority("ADMIN")
@@ -64,7 +63,6 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/tickets/get").hasAnyAuthority("ADMIN","EMPLOYEE")
                 .requestMatchers("/api/v1/tickets/get-by-id/{ticket_id}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/tickets/resolve-ticket/{ticket_id}").hasAuthority("ADMIN")
-                // allow any one to reach this endpoint
                 .requestMatchers("/api/v1/employees/**").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/tickets/add-l-ticket").hasAuthority("LESSOR")
                 .requestMatchers("/api/v1/tickets/get-l-tickets").hasAuthority("LESSOR")
@@ -89,6 +87,8 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/renters/buy-product/{product_id}/{typeOfDay}/{quantity}/{duration}").hasAuthority("RENTER")
                 .requestMatchers("/api/v1/renters/renter-info").hasAuthority("RENTER")
                 .requestMatchers("/api/v1/renters/update").hasAnyAuthority("ADMIN","RENTER")
+
+                .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("AMDIN")
 
                 .requestMatchers("/api/v1/employees/assing-{warehouseId}").hasAuthority("ADMIN")
                 .requestMatchers("/api/v1/employees/search").hasAuthority("ADMIN")

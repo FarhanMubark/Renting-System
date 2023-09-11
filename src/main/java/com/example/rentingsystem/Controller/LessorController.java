@@ -22,9 +22,9 @@ public class LessorController {
         return ResponseEntity.status(200).body(lessorService.getLessors());
     }
 
-    @PostMapping("/assing-{warehouseId}")
-    public ResponseEntity assign(@AuthenticationPrincipal User user, @PathVariable Integer warehouseId){
-        lessorService.assignLessorToWarehouse(user.getLessor().getId(),warehouseId);
+    @PostMapping("/{lessor_id}-assing-{warehouseId}")
+    public ResponseEntity assign(@PathVariable Integer lessor_id, @PathVariable Integer warehouseId){
+        lessorService.assignLessorToWarehouse(lessor_id,warehouseId);
         return ResponseEntity.status(200).body(new ApiResponse("Lessor assigned"));
     }
 
@@ -40,9 +40,9 @@ public class LessorController {
         return ResponseEntity.status(200).body(new ApiResponse("Lessor subscribed"));
     }
 
-    @GetMapping("/search")
-    public ResponseEntity findLessorByName(@AuthenticationPrincipal User user ){
-        return ResponseEntity.status(200).body(lessorService.getLessorByName(user.getLessor().getName()));
+    @GetMapping("/search-{lessorName}")
+    public ResponseEntity findLessorByName(@PathVariable String lessorName ){
+        return ResponseEntity.status(200).body(lessorService.getLessorByName(lessorName));
     }
 
     @GetMapping("/findMySubscriber")
