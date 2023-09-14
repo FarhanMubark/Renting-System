@@ -41,6 +41,8 @@ Endpoints & Methods:
 - blockLessor
 
 -----------------------------------------
+Adding Security layer for our project
+-----------------------------------------
 
 Spring Security(Authorization):
 
