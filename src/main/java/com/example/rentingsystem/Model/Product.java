@@ -50,6 +50,9 @@ public class Product {
 
 
     @Column(columnDefinition = "varchar(25)")
+
+
+
     private String productStatus;
 
     private LocalDateTime endDate;
