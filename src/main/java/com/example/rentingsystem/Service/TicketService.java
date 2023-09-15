@@ -36,7 +36,7 @@ public class TicketService {
 
 
 
-    public void addLessorTickets(Integer user_id, Ticket ticket){
+        public void addLessorTickets(Integer user_id, Ticket ticket){
         Lessor lessor = lessorRepository.findLessorById(user_id);
 
             ticket.setLessor(lessor);
@@ -71,7 +71,7 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
-    public void addRenterTicket(Integer user_id, Ticket ticket){
+        public void addRenterTicket(Integer user_id, Ticket ticket){
         Renter renter = renterRepository.findRenterById(user_id);
 
                 ticket.setRenter(renter);

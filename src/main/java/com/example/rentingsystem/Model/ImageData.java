@@ -18,8 +18,8 @@ public class ImageData {
     private String name;
     private String type;
     private Integer product_id;
-    // convert the file in byte array and stored in db
-    @Lob // to store any binary format in db
+
+    @Lob
     @Column(name = "imagedata", length = 100000)
     private byte[] imageData;
 }

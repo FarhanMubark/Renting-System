@@ -28,13 +28,17 @@ public class ImageDataService {
         }
         ImageData data = new ImageData();
         data.setProduct_id(product_id);
+
         ImageData imageData = imageDataRepository.save(ImageData.builder()
                 .name(file.getOriginalFilename())
                 .type(file.getContentType())
                 .imageData(ImageUtil.compressImage(file.getBytes())).product_id(product_id).build());
         if (imageData != null) {
-            return "file uploaded successfully : " + file.getOriginalFilename();
+            return  file.getOriginalFilename();
+        } else if (imageData == null){
+            return "Not found";
         }
+
 
         return "Some Thing went wrong !";
 

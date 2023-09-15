@@ -1,7 +1,6 @@
 package com.example.rentingsystem.Model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +22,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(columnDefinition = "varchar(25) not null ")
+    @Column(columnDefinition = "varchar(25) not null unique")
     private String username;
     @Column(columnDefinition = "varchar(255) not null unique")
     private String password;
