@@ -12,7 +12,6 @@ import com.example.rentingsystem.Repository.EmployeeRepository;
 import com.example.rentingsystem.Repository.LessorRepository;
 import com.example.rentingsystem.Repository.RenterRepository;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

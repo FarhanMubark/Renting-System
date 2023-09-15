@@ -1,12 +1,8 @@
 package com.example.rentingsystem.Service;
 
 import com.example.rentingsystem.Api.ApiException;
-import com.example.rentingsystem.DTOs.RenterDTO;
 import com.example.rentingsystem.Model.Product;
-import com.example.rentingsystem.Model.Lessor;
 import com.example.rentingsystem.Model.Renter;
-import com.example.rentingsystem.Model.User;
-import com.example.rentingsystem.Repository.AuthRepository;
 import com.example.rentingsystem.Repository.ProductRepository;
 import com.example.rentingsystem.Repository.RenterRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +17,7 @@ public class RenterService {
     private final RenterRepository renterRepository;
     private final ProductRepository productRepository;
     private final OrderSerivce orderSerivce;
-    private final AuthRepository authRepository;
-    private final AuthService authService;
+
     public List<Renter> getRenters(){
         return renterRepository.findAll();
     }
